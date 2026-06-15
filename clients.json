@@ -8,6 +8,10 @@
         "file": "AEGIS-C-20260615-1728.html"
       },
       {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260615-2044.html"
+      },
+      {
         "tariff": "START",
         "file": "AEGIS-S-20260615-1707.html"
       },
@@ -35,6 +39,10 @@
     "domain": "lavkafreida.ru",
     "folder": "lavkafreida_ru",
     "reports": [
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260615-2039.html"
+      },
       {
         "tariff": "START",
         "file": "AEGIS-S-20260615-1749.html"
