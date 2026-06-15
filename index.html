@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AEGIS CORE — Клиенты</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d1117;color:#c9d1d9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;padding:20px}
+h1{font-size:24px;margin-bottom:20px;color:#58a6ff}
+.client{border:1px solid #30363d;border-radius:8px;padding:16px;margin-bottom:12px;background:#161b22}
+.client:hover{border-color:#58a6ff}
+.client-name{font-size:18px;font-weight:600;margin-bottom:8px}
+.client-links{display:flex;gap:12px;flex-wrap:wrap}
+.client-links a{color:#58a6ff;text-decoration:none;font-size:14px;padding:6px 12px;border:1px solid #30363d;border-radius:6px}
+.client-links a:hover{background:#1f2937}
+.date{color:#8b949e;font-size:12px;margin-top:8px}
+.search{margin-bottom:20px}
+.search input{width:100%;padding:10px;background:#161b22;border:1px solid #30363d;border-radius:6px;color:#c9d1d9;font-size:16px}
+</style>
+</head>
+<body>
+<h1>AEGIS CORE — Отчёты клиентов</h1>
+<div class="search"><input type="text" id="search" placeholder="Поиск клиента..." onkeyup="filter()"></div>
+<div id="clients">
+<div class='client' data-name='dodopizza_ru'>
+<div class='client-name'>dodopizza_ru</div>
+<div class='client-links'>
+<a href='dodopizza_ru-e6b1/START.html'>START</a>
+</div>
+<div class='date'>Обновлён: 15.06.2026</div>
+</div>
+<div class='client' data-name='electrongroup.ru'>
+<div class='client-name'>electrongroup.ru</div>
+<div class='client-links'>
+<a href='electrongroup-ru/VERIFY.html'>VERIFY</a>
+</div>
+<div class='date'>Обновлён: 15.06.2026</div>
+</div>
+<div class='client' data-name='electrongroup_ru'>
+<div class='client-name'>electrongroup_ru</div>
+<div class='client-links'>
+</div>
+<div class='date'>Обновлён: 15.06.2026</div>
+</div>
+<div class='client' data-name='redpizza_ru'>
+<div class='client-name'>redpizza_ru</div>
+<div class='client-links'>
+<a href='redpizza_ru-0f48/VERIFY.html'>VERIFY</a>
+</div>
+<div class='date'>Обновлён: 15.06.2026</div>
+</div>
+<div class='client' data-name='redpizza_ru'>
+<div class='client-name'>redpizza_ru</div>
+<div class='client-links'>
+<a href='redpizza_ru-6a39/VERIFY.html'>VERIFY</a>
+</div>
+<div class='date'>Обновлён: 15.06.2026</div>
+</div>
+</div>
+<script>
+function filter(){let q=document.getElementById('search').value.toLowerCase();document.querySelectorAll('.client').forEach(c=>{c.style.display=c.dataset.name.includes(q)?'block':'none'})}
+</script>
+</body>
+</html>
