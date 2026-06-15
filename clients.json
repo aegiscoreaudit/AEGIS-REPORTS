@@ -1,0 +1,126 @@
+[
+  {
+    "domain": "dodopizza.ru",
+    "folder": "dodopizza_ru",
+    "reports": [
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260615-1728.html"
+      },
+      {
+        "tariff": "START",
+        "file": "AEGIS-S-20260615-1707.html"
+      },
+      {
+        "tariff": "START",
+        "file": "AEGIS-S-20260615-1741.html"
+      },
+      {
+        "tariff": "START",
+        "file": "AEGIS-S-20260615-1755.html"
+      }
+    ]
+  },
+  {
+    "domain": "inmyroom.ru",
+    "folder": "inmyroom_ru",
+    "reports": [
+      {
+        "tariff": "VERIFY",
+        "file": "AEGIS-V-20260615-1414.html"
+      }
+    ]
+  },
+  {
+    "domain": "lavkafreida.ru",
+    "folder": "lavkafreida_ru",
+    "reports": [
+      {
+        "tariff": "START",
+        "file": "AEGIS-S-20260615-1749.html"
+      },
+      {
+        "tariff": "START",
+        "file": "AEGIS-S-20260615-1754.html"
+      }
+    ]
+  },
+  {
+    "domain": "magazinmebeli.net",
+    "folder": "magazinmebeli_net",
+    "reports": [
+      {
+        "tariff": "VERIFY",
+        "file": "AEGIS-V-20260615-1408.html"
+      }
+    ]
+  },
+  {
+    "domain": "meb-online.ru",
+    "folder": "meb-online_ru",
+    "reports": [
+      {
+        "tariff": "VERIFY",
+        "file": "AEGIS-V-20260615-1410.html"
+      }
+    ]
+  },
+  {
+    "domain": "mebel-1000.ru",
+    "folder": "mebel-1000_ru",
+    "reports": [
+      {
+        "tariff": "VERIFY",
+        "file": "AEGIS-V-20260615-1419.html"
+      }
+    ]
+  },
+  {
+    "domain": "mebel-sergiev-posad.ru",
+    "folder": "mebel-sergiev-posad_ru",
+    "reports": [
+      {
+        "tariff": "VERIFY",
+        "file": "AEGIS-V-20260615-1423.html"
+      }
+    ]
+  },
+  {
+    "domain": "redpizza.ru",
+    "folder": "redpizza_ru",
+    "reports": [
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260615-1720.html"
+      },
+      {
+        "tariff": "VERIFY",
+        "file": "AEGIS-V-20260615-1611.html"
+      }
+    ]
+  },
+  {
+    "domain": "sergiopizza.ru",
+    "folder": "sergiopizza_ru",
+    "reports": [
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260615-1846.html"
+      },
+      {
+        "tariff": "START",
+        "file": "AEGIS-S-20260615-1848.html"
+      }
+    ]
+  },
+  {
+    "domain": "transpizza.ru",
+    "folder": "transpizza_ru",
+    "reports": [
+      {
+        "tariff": "VERIFY",
+        "file": "AEGIS-V-20260615-1803.html"
+      }
+    ]
+  }
+]
