@@ -160,6 +160,10 @@
         "file": "AEGIS-S-20260615-1953.html"
       },
       {
+        "tariff": "START",
+        "file": "AEGIS-S-20260615-2115.html"
+      },
+      {
         "tariff": "VERIFY",
         "file": "AEGIS-V-20260615-1803.html"
       }
