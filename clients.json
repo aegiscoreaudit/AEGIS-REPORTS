@@ -128,6 +128,22 @@
     "folder": "transpizza_ru",
     "reports": [
       {
+        "tariff": "START",
+        "file": "AEGIS-S-20260615-1946.html"
+      },
+      {
+        "tariff": "START",
+        "file": "AEGIS-S-20260615-1948.html"
+      },
+      {
+        "tariff": "START",
+        "file": "AEGIS-S-20260615-1951.html"
+      },
+      {
+        "tariff": "START",
+        "file": "AEGIS-S-20260615-1953.html"
+      },
+      {
         "tariff": "VERIFY",
         "file": "AEGIS-V-20260615-1803.html"
       }
