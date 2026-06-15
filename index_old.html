@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AEGIS CORE — Dashboard</title>
+<style>
+:root {
+    --bg-main: #0d1117;
+    --bg-card: #161b22;
+    --bg-surface: #1c2128;
+    --text-main: #c9d1d9;
+    --text-muted: #8b949e;
+    --accent: #58a6ff;
+    --comply: #10B981;
+    --verify: #F59E0B;
+    --critical: #FF2A4F;
+    --start: #8b949e;
+    --deep: #FF2A4F;
+    --border: #30363d;
+    --radius-btn: 6px;
+    --radius-card: 8px;
+    --radius-modal: 12px;
+    --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+    background: var(--bg-main);
+    color: var(--text-main);
+    font-family: var(--font-main);
+    font-size: 15px;
+    line-height: 1.5;
+    min-height: 100vh;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.header {
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-main);
+    letter-spacing: -0.02em;
+}
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #00E676, #00D4FF);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+.slogan { font-size: 13px; color: var(--text-muted); margin-left: 4px; }
+.header-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.counter {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    padding: 6px 12px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-btn);
+}
+.counter strong { color: var(--accent); }
+.btn-refresh {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 6px 14px;
+    border-radius: var(--radius-btn);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.btn-refresh:hover { border-color: var(--accent); color: var(--accent); }
+.container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+.filters {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 16px;
+    margin-bottom: 24px;
+}
+.filters-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.search-box { flex: 1; min-width: 200px; position: relative; }
+.search-box input {
+    width: 100%;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 8px 12px 8px 36px;
+    border-radius: var(--radius-btn);
+    font-size: 14px;
+    font-family: var(--font-main);
+    outline: none;
+    transition: border-color 0.2s;
+}
+.search-box input:focus { border-color: var(--accent); }
+.search-box::before {
+    content: "🔍";
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    pointer-events: none;
+}
+.filter-select {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 8px 12px;
+    border-radius: var(--radius-btn);
+    font-size: 13px;
+    font-family: var(--font-main);
+    cursor: pointer;
+    outline: none;
+}
+.filter-select:focus { border-color: var(--accent); }
+.active-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; min-height: 0; }
+.active-filters:empty { display: none; }
+.filter-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(88, 166, 255, 0.1);
+    border: 1px solid rgba(88, 166, 255, 0.3);
+    color: var(--accent);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-family: var(--font-mono);
+}
+.filter-tag button {
+    background: none; border: none; color: var(--accent); cursor: pointer;
+    font-size: 14px; line-height: 1; padding: 0; opacity: 0.7;
+}
+.filter-tag button:hover { opacity: 1; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) {
+    .grid { grid-template-columns: 1fr; }
+    .header-inner { flex-direction: column; align-items: flex-start; }
+    .header-right { margin-left: 0; width: 100%; justify-content: space-between; }
+    .slogan { display: none; }
+}
+.client-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 16px;
+    transition: all 0.2s;
+    cursor: default;
+}
+.client-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+.client-name { font-size: 17px; font-weight: 700; margin-bottom: 4px; word-break: break-all; }
+.client-date { font-size: 12px; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: 12px; }
+.client-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.badge {
+    display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px;
+    border-radius: 20px; font-size: 11px; font-weight: 600;
+    font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em;
+    cursor: pointer; transition: all 0.15s; text-decoration: none; border: 1px solid transparent;
+}
+.badge:hover { opacity: 0.85; transform: scale(1.05); text-decoration: none; }
+.badge-start { background: rgba(139,148,158,0.15); color: var(--start); border-color: rgba(139,148,158,0.3); }
+.badge-verify { background: rgba(245,158,11,0.15); color: var(--verify); border-color: rgba(245,158,11,0.3); }
+.badge-comply { background: rgba(16,185,129,0.15); color: var(--comply); border-color: rgba(16,185,129,0.3); }
+.badge-deep { background: rgba(255,42,79,0.15); color: var(--deep); border-color: rgba(255,42,79,0.3); }
+.badge-disabled { opacity: 0.25; cursor: not-allowed; pointer-events: none; }
+.empty-state { grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--text-muted); }
+.empty-state-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.5; }
+.empty-state-title { font-size: 18px; font-weight: 600; color: var(--text-main); margin-bottom: 8px; }
+.empty-state-text { font-size: 14px; max-width: 400px; margin: 0 auto; }
+.footer { max-width: 1200px; margin: 40px auto 0; padding: 24px; border-top: 1px solid var(--border); text-align: center; font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+.footer-methods { font-family: var(--font-mono); font-size: 11px; margin-top: 4px; opacity: 0.7; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.client-card { animation: fadeIn 0.3s ease-out backwards; }
+.client-card:nth-child(1) { animation-delay: 0.02s; }
+.client-card:nth-child(2) { animation-delay: 0.04s; }
+.client-card:nth-child(3) { animation-delay: 0.06s; }
+.client-card:nth-child(4) { animation-delay: 0.08s; }
+.client-card:nth-child(5) { animation-delay: 0.10s; }
+.client-card:nth-child(6) { animation-delay: 0.12s; }
+</style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-inner">
+        <div class="logo">
+            <div class="logo-icon">☠</div>
+            <div>AEGIS CORE<div class="slogan">Аудит безопасности для МСБ РФ</div></div>
+        </div>
+        <div class="header-right">
+            <div class="counter" id="counter">— клиентов · — отчётов</div>
+            <button class="btn-refresh" onclick="location.reload()"><span>↻</span> Обновить</button>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    <div class="filters">
+        <div class="filters-row">
+            <div class="search-box">
+                <input type="text" id="search" placeholder="Поиск по домену..." autocomplete="off">
+            </div>
+            <select class="filter-select" id="filter-type">
+                <option value="all">Все отчёты</option>
+                <option value="start">📄 START</option>
+                <option value="verify">🔍 VERIFY</option>
+                <option value="comply">⚖️ COMPLY</option>
+                <option value="deep">💀 DEEP</option>
+            </select>
+            <select class="filter-select" id="filter-docs">
+                <option value="all">Все клиенты</option>
+                <option value="docs">С документами 152-ФЗ</option>
+                <option value="no-docs">Без документов</option>
+            </select>
+            <select class="filter-select" id="sort-by">
+                <option value="date-desc">Сначала новые</option>
+                <option value="date-asc">Сначала старые</option>
+                <option value="name-asc">А → Я</option>
+                <option value="name-desc">Я → А</option>
+            </select>
+        </div>
+        <div class="active-filters" id="active-filters"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+</main>
+
+<footer class="footer">
+    <div>AEGIS CORE © 2026 · Евгений Свириденко · Independent Security Researcher</div>
+    <div class="footer-methods">OWASP Top 10 · 152-ФЗ · КоАП 13.11 · ФСТЭК №21/239 · MITRE ATT&CK · CVSS v3.1</div>
+</footer>
+
+<script>
+const CLIENTS = [
+    {name:"redpizza.ru",date:"2026-06-15",start:true,verify:true,comply:true,deep:false,docs:true},
+    {name:"shoko.ru",date:"2026-06-13",start:true,verify:true,comply:false,deep:false,docs:false},
+    {name:"dveri.com",date:"2026-06-13",start:true,verify:true,comply:false,deep:false,docs:false},
+    {name:"intim-magazin.ru",date:"2026-06-13",start:true,verify:true,comply:false,deep:false,docs:false},
+    {name:"intimhouse.ru",date:"2026-06-13",start:true,verify:true,comply:false,deep:false,docs:false},
+    {name:"lavkafreida.ru",date:"2026-06-13",start:true,verify:true,comply:false,deep:false,docs:false},
+    {name:"autodoc.ru",date:"2026-06-13",start:true,verify:true,comply:false,deep:false,docs:false},
+    {name:"transpizza.ru",date:"2026-06-14",start:true,verify:true,comply:true,deep:false,docs:true}
+    {name:"sergiopizza.ru",date:"2026-06-15",start:true,verify:false,comply:true,deep:false,docs:true,folder:"sergiopizza_ru"},
+];
+const BADGE_CONFIG = {
+    start:{label:"START",icon:"📄",cls:"badge-start"},
+    verify:{label:"VERIFY",icon:"🔍",cls:"badge-verify"},
+    comply:{label:"COMPLY",icon:"⚖️",cls:"badge-comply"},
+    deep:{label:"DEEP",icon:"💀",cls:"badge-deep"}
+};
+function formatDate(d){const m=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'    {name:"sergiopizza.ru",date:"2026-06-15",start:true,verify:false,comply:true,deep:false,docs:true,folder:"sergiopizza_ru"},
+];return new Date(d).getDate()+' '+m[new Date(d).getMonth()]+' '+new Date(d).getFullYear()}
+function reportUrl(n,t){return n+'/'+t+'.html'}
+function renderCard(c){
+    const b=['start','verify','comply','deep'].map(t=>{
+        const cfg=BADGE_CONFIG[t], act=c[t    {name:"sergiopizza.ru",date:"2026-06-15",start:true,verify:false,comply:true,deep:false,docs:true,folder:"sergiopizza_ru"},
+];
+        const url=act?reportUrl(c.name,t):'#';
+        const cls=act?cfg.cls:`${cfg.cls} badge-disabled`;
+        const target=act?'target="_blank" rel="noopener"':'';
+        return `<a href="${url}" class="badge ${cls}" ${target}>${cfg.icon} ${cfg.label}</a>`;
+    }).join('');
+    return `<div class="client-card" data-name="${c.name.toLowerCase()}" data-date="${c.date}" data-start="${c.start}" data-verify="${c.verify}" data-comply="${c.comply}" data-deep="${c.deep}" data-docs="${c.docs}">
+        <div class="client-name">${c.name}</div>
+        <div class="client-date">Обновлено: ${formatDate(c.date)}</div>
+        <div class="client-badges">${b}</div></div>`;
+}
+function getFiltered(){
+    const s=document.getElementById('search').value.toLowerCase().trim();
+    const tf=document.getElementById('filter-type').value;
+    const df=document.getElementById('filter-docs').value;
+    const sb=document.getElementById('sort-by').value;
+    let f=CLIENTS.filter(c=>{
+        if(s&&!c.name.toLowerCase().includes(s))return false;
+        if(tf!=='all'&&!c[tf])return false;
+        if(df==='docs'&&!c.docs)return false;
+        if(df==='no-docs'&&c.docs)return false;
+        return true;
+    });
+    f.sort((a,b)=>{
+        switch(sb){
+            case'date-desc':return new Date(b.date)-new Date(a.date);
+            case'date-asc':return new Date(a.date)-new Date(b.date);
+            case'name-asc':return a.name.localeCompare(b.name,'ru');
+            case'name-desc':return b.name.localeCompare(a.name,'ru');
+            default:return 0;
+        }
+    });
+    return f;
+}
+function renderActiveFilters(){
+    const c=document.getElementById('active-filters');
+    const t=[    {name:"sergiopizza.ru",date:"2026-06-15",start:true,verify:false,comply:true,deep:false,docs:true,folder:"sergiopizza_ru"},
+];
+    const s=document.getElementById('search').value.trim();
+    const tf=document.getElementById('filter-type').value;
+    const df=document.getElementById('filter-docs').value;
+    if(s)t.push(`<span class="filter-tag">Поиск:"${s}"<button onclick="clearFilter('search')">×</button></span>`);
+    if(tf!=='all')t.push(`<span class="filter-tag">${BADGE_CONFIG[tf].label}<button onclick="clearFilter('type')">×</button></span>`);
+    if(df!=='all')t.push(`<span class="filter-tag">${df==='docs'?'С документами':'Без документов'}<button onclick="clearFilter('docs')">×</button></span>`);
+    c.innerHTML=t.join('');
+}
+function clearFilter(t){
+    if(t==='search')document.getElementById('search').value='';
+    if(t==='type')document.getElementById('filter-type').value='all';
+    if(t==='docs')document.getElementById('filter-docs').value='all';
+    render();
+}
+function updateCounter(){
+    const tr=CLIENTS.reduce((s,c)=>s+['start','verify','comply','deep'].filter(t=>c[t]).length,0);
+    document.getElementById('counter').innerHTML=`<strong>${CLIENTS.length}</strong> клиентов · <strong>${tr}</strong> отчётов`;
+}
+function render(){
+    const f=getFiltered();
+    const g=document.getElementById('grid');
+    if(f.length===0){
+        const hf=document.getElementById('search').value.trim()||document.getElementById('filter-type').value!=='all'||document.getElementById('filter-docs').value!=='all';
+        g.innerHTML=`<div class="empty-state"><div class="empty-state-icon">${hf?'🔍':'🛡️'}</div><div class="empty-state-title">${hf?'Ничего не найдено':'Пока нет отчётов'}</div><div class="empty-state-text">${hf?'Измените параметры поиска.':'Запустите AEGIS CORE и опубликуйте первый аудит.'}</div></div>`;
+    }else{g.innerHTML=f.map(renderCard).join('');}
+    renderActiveFilters();updateCounter();
+}
+document.getElementById('search').addEventListener('input',render);
+document.getElementById('filter-type').addEventListener('change',render);
+document.getElementById('filter-docs').addEventListener('change',render);
+document.getElementById('sort-by').addEventListener('change',render);
+render();
+</script>
+</body>
+</html>

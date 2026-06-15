@@ -3,116 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AEGIS CORE — Dashboard</title>
+<title>AEGIS CORE — Клиентские отчёты</title>
 <style>
-:root {
-    --bg-main: #0d1117;
-    --bg-card: #161b22;
-    --bg-surface: #1c2128;
-    --text-main: #c9d1d9;
-    --text-muted: #8b949e;
-    --accent: #58a6ff;
-    --comply: #10B981;
-    --verify: #F59E0B;
-    --critical: #FF2A4F;
-    --start: #8b949e;
-    --deep: #FF2A4F;
-    --border: #30363d;
-    --radius-btn: 6px;
-    --radius-card: 8px;
-    --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-    --font-mono: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
-}
+:root { --bg: #0A0C10; --card: #11141A; --border: rgba(255,255,255,0.06); --accent: #00D4FF; --green: #10B981; --text: #EAECEF; --muted: #8B949E; }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { background: var(--bg-main); color: var(--text-main); font-family: var(--font-main); font-size: 15px; line-height: 1.5; min-height: 100vh; }
-a { color: var(--accent); text-decoration: none; }
-a:hover { text-decoration: underline; }
-.header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
-.header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-.logo { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
-.logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg, #00E676, #00D4FF); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-.slogan { font-size: 13px; color: var(--text-muted); margin-left: 4px; }
-.header-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
-.counter { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); padding: 6px 12px; background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-btn); }
-.counter strong { color: var(--accent); }
-.container { max-width: 1200px; margin: 0 auto; padding: 24px; }
-.filters { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 16px; margin-bottom: 24px; }
-.filters-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-.search-box { flex: 1; min-width: 200px; position: relative; }
-.search-box input { width: 100%; background: var(--bg-surface); border: 1px solid var(--border); color: var(--text-main); padding: 8px 12px 8px 36px; border-radius: var(--radius-btn); font-size: 14px; outline: none; }
-.search-box::before { content: "🔍"; position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 14px; pointer-events: none; }
-.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
-.client-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 16px; transition: all 0.2s; }
-.client-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
-.client-name { font-size: 17px; font-weight: 700; margin-bottom: 4px; word-break: break-all; }
-.client-date { font-size: 12px; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: 12px; }
-.client-badges { display: flex; gap: 6px; flex-wrap: wrap; }
-.badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; font-family: var(--font-mono); text-transform: uppercase; cursor: pointer; text-decoration: none; border: 1px solid transparent; }
-.badge:hover { opacity: 0.85; transform: scale(1.05); text-decoration: none; }
-.badge-start { background: rgba(139,148,158,0.15); color: var(--start); border-color: rgba(139,148,158,0.3); }
-.badge-verify { background: rgba(245,158,11,0.15); color: var(--verify); border-color: rgba(245,158,11,0.3); }
-.badge-comply { background: rgba(16,185,129,0.15); color: var(--comply); border-color: rgba(16,185,129,0.3); }
-.badge-deep { background: rgba(255,42,79,0.15); color: var(--deep); border-color: rgba(255,42,79,0.3); }
-.badge-disabled { opacity: 0.25; cursor: not-allowed; pointer-events: none; }
-.empty-state { grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--text-muted); }
-.footer { max-width: 1200px; margin: 40px auto 0; padding: 24px; border-top: 1px solid var(--border); text-align: center; font-size: 12px; color: var(--text-muted); }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; padding: 20px; }
+.container { max-width: 900px; margin: 0 auto; }
+h1 { font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
+.subtitle { font-size: 0.8rem; color: var(--muted); margin-bottom: 24px; }
+.client-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+.client-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 8px; }
+.report-links { display: flex; gap: 8px; flex-wrap: wrap; }
+.report-link { padding: 6px 14px; border-radius: 4px; text-decoration: none; font-size: 0.78rem; font-weight: 500; }
+.report-link.start { background: rgba(107,114,128,0.15); color: #6B7280; }
+.report-link.verify { background: rgba(0,240,255,0.12); color: #00F0FF; }
+.report-link.comply { background: rgba(0,230,118,0.12); color: #10B981; }
+.report-link.deep { background: rgba(239,68,68,0.12); color: #EF4444; }
+.empty { text-align: center; color: var(--muted); padding: 40px; }
+.footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 0.7rem; color: var(--muted); text-align: center; }
 </style>
 </head>
 <body>
-<header class="header">
-    <div class="header-inner">
-        <div class="logo"><div class="logo-icon">☠</div><div>AEGIS CORE<div class="slogan">Аудит безопасности для МСБ РФ</div></div></div>
-        <div class="header-right"><div class="counter" id="counter">— клиентов · — отчётов</div></div>
-    </div>
-</header>
-<main class="container">
-    <div class="filters">
-        <div class="filters-row">
-            <div class="search-box"><input type="text" id="search" placeholder="Поиск по домену..." autocomplete="off"></div>
-        </div>
-    </div>
-    <div class="grid" id="grid"></div>
-</main>
-<footer class="footer">AEGIS CORE © 2026 · Евгений Свириденко · OWASP Top 10 · 152-ФЗ · MITRE ATT&CK</footer>
+<div class="container">
+    <h1>🛡 AEGIS CORE</h1>
+    <div class="subtitle">Клиентские отчёты аудита безопасности</div>
+    <div id="clients"></div>
+    <div class="footer">AEGIS CORE v8.4 · Автоматический аудит безопасности · 152-ФЗ</div>
+</div>
 <script>
 async function loadClients() {
     try {
         const resp = await fetch('clients.json');
-        return await resp.json();
+        const clients = await resp.json();
+        renderClients(clients);
     } catch(e) {
-        return [];
+        document.getElementById('clients').innerHTML = '<div class="empty">⚠️ Не удалось загрузить clients.json</div>';
     }
 }
-function renderCard(c) {
-    const badges = c.reports.map(r => {
-        const cls = 'badge-' + r.tariff.toLowerCase();
-        return `<a href="${c.folder}/${r.file}" class="badge ${cls}" target="_blank">${r.tariff}</a>`;
-    }).join('');
-    return `<div class="client-card" data-name="${c.domain}">
-        <div class="client-name">🌐 ${c.domain}</div>
-        <div class="client-date">${c.reports.length} отчётов</div>
-        <div class="client-badges">${badges}</div>
-    </div>`;
-}
-async function render() {
-    const clients = await loadClients();
-    const grid = document.getElementById('grid');
+
+function renderClients(clients) {
+    const container = document.getElementById('clients');
     if (!clients.length) {
-        grid.innerHTML = '<div class="empty-state">🛡️<br>Пока нет отчётов</div>';
-    } else {
-        grid.innerHTML = clients.map(renderCard).join('');
+        container.innerHTML = '<div class="empty">Нет клиентских отчётов</div>';
+        return;
     }
-    document.getElementById('counter').innerHTML = `<strong>${clients.length}</strong> клиентов · <strong>${clients.reduce((s,c)=>s+c.reports.length,0)}</strong> отчётов`;
+    
+    container.innerHTML = clients.map(c => {
+        const reports = c.reports.map(r => {
+            const cls = r.tariff.toLowerCase();
+            return `<a href="${c.folder}/${r.file}" class="report-link ${cls}">${r.tariff}</a>`;
+        }).join('');
+        return `<div class="client-card">
+            <div class="client-name">🌐 ${c.domain}</div>
+            <div class="report-links">${reports}</div>
+        </div>`;
+    }).join('');
 }
-document.getElementById('search').addEventListener('input', async function() {
-    const q = this.value.toLowerCase();
-    const clients = await loadClients();
-    const filtered = clients.filter(c => c.domain.includes(q));
-    document.getElementById('grid').innerHTML = filtered.length ? filtered.map(renderCard).join('') : '<div class="empty-state">🔍 Ничего не найдено</div>';
-});
-render();
+
+loadClients();
 </script>
 </body>
 </html>

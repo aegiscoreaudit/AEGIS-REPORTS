@@ -56,6 +56,16 @@
     ]
   },
   {
+    "domain": "mark-mebel.ru",
+    "folder": "mark-mebel_ru",
+    "reports": [
+      {
+        "tariff": "VERIFY",
+        "file": "AEGIS-V-20260615-1932.html"
+      }
+    ]
+  },
+  {
     "domain": "meb-online.ru",
     "folder": "meb-online_ru",
     "reports": [
