@@ -271,6 +271,7 @@ const CLIENTS = [
     {name:"lavkafreida.ru",date:"2026-06-13",start:true,verify:true,comply:false,deep:false,docs:false},
     {name:"autodoc.ru",date:"2026-06-13",start:true,verify:true,comply:false,deep:false,docs:false},
     {name:"transpizza.ru",date:"2026-06-14",start:true,verify:true,comply:true,deep:false,docs:true}
+    {name:"sergiopizza.ru",date:"2026-06-15",start:true,verify:false,comply:true,deep:false,docs:true,folder:"sergiopizza_ru"},
 ];
 const BADGE_CONFIG = {
     start:{label:"START",icon:"📄",cls:"badge-start"},
@@ -278,11 +279,13 @@ const BADGE_CONFIG = {
     comply:{label:"COMPLY",icon:"⚖️",cls:"badge-comply"},
     deep:{label:"DEEP",icon:"💀",cls:"badge-deep"}
 };
-function formatDate(d){const m=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];return new Date(d).getDate()+' '+m[new Date(d).getMonth()]+' '+new Date(d).getFullYear()}
+function formatDate(d){const m=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'    {name:"sergiopizza.ru",date:"2026-06-15",start:true,verify:false,comply:true,deep:false,docs:true,folder:"sergiopizza_ru"},
+];return new Date(d).getDate()+' '+m[new Date(d).getMonth()]+' '+new Date(d).getFullYear()}
 function reportUrl(n,t){return n+'/'+t+'.html'}
 function renderCard(c){
     const b=['start','verify','comply','deep'].map(t=>{
-        const cfg=BADGE_CONFIG[t], act=c[t];
+        const cfg=BADGE_CONFIG[t], act=c[t    {name:"sergiopizza.ru",date:"2026-06-15",start:true,verify:false,comply:true,deep:false,docs:true,folder:"sergiopizza_ru"},
+];
         const url=act?reportUrl(c.name,t):'#';
         const cls=act?cfg.cls:`${cfg.cls} badge-disabled`;
         const target=act?'target="_blank" rel="noopener"':'';
@@ -318,7 +321,8 @@ function getFiltered(){
 }
 function renderActiveFilters(){
     const c=document.getElementById('active-filters');
-    const t=[];
+    const t=[    {name:"sergiopizza.ru",date:"2026-06-15",start:true,verify:false,comply:true,deep:false,docs:true,folder:"sergiopizza_ru"},
+];
     const s=document.getElementById('search').value.trim();
     const tf=document.getElementById('filter-type').value;
     const df=document.getElementById('filter-docs').value;
