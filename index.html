@@ -33,7 +33,7 @@ h1 { font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
 <script>
 async function loadClients() {
     try {
-        const resp = await fetch('clients.json');
+        const resp = await fetch('clients.json?v=' + Date.now());
         const clients = await resp.json();
         renderClients(clients);
     } catch(e) {
