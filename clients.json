@@ -104,6 +104,10 @@
         "file": "AEGIS-C-20260615-1720.html"
       },
       {
+        "tariff": "START",
+        "file": "AEGIS-S-20260615-2003.html"
+      },
+      {
         "tariff": "VERIFY",
         "file": "AEGIS-V-20260615-1611.html"
       }
