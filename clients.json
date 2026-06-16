@@ -405,18 +405,6 @@
     "folder": "sergiopizza_ru",
     "reports": [
       {
-        "tariff": "START",
-        "file": "AEGIS-S-20260617-0144.html",
-        "date": "2026-06-17T01:44:44.356753",
-        "size_kb": 77,
-        "vulns": {
-          "critical": 0,
-          "high": 5,
-          "medium": 6,
-          "low": 6
-        }
-      },
-      {
         "tariff": "VERIFY",
         "file": "AEGIS-V-20260617-0144.html",
         "date": "2026-06-17T01:44:51.578004",
@@ -451,9 +439,21 @@
           "medium": 6,
           "low": 6
         }
+      },
+      {
+        "tariff": "START",
+        "file": "AEGIS-S-20260617-0148.html",
+        "date": "2026-06-17T01:49:02.042679",
+        "size_kb": 77,
+        "vulns": {
+          "critical": 0,
+          "high": 5,
+          "medium": 6,
+          "low": 6
+        }
       }
     ],
-    "last_scan": "2026-06-17T01:45:05.909226",
+    "last_scan": "2026-06-17T01:49:02.042679",
     "total_vulns": {
       "critical": 0,
       "high": 5,
