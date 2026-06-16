@@ -116,6 +116,10 @@
         "file": "AEGIS-C-20260615-1720.html"
       },
       {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260616-0737.html"
+      },
+      {
         "tariff": "START",
         "file": "AEGIS-S-20260615-2003.html"
       },
@@ -134,12 +138,140 @@
         "file": "AEGIS-C-20260615-1846.html"
       },
       {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260615-2257.html"
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260615-2314.html"
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260615-2323.html"
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260615-2333.html"
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260615-2339.html"
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260615-2342.html"
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260615-2345.html"
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260615-2348.html"
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260615-2349.html"
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260615-2354.html"
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260615-2358.html"
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260615-2359.html"
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260616-0005.html"
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260616-0008.html"
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260616-0009.html"
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260616-0016.html"
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260616-0019.html"
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260616-0020.html"
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260616-0024.html"
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260616-0028.html"
+      },
+      {
+        "tariff": "DEEP",
+        "file": "AEGIS-D-20260615-2354.html"
+      },
+      {
+        "tariff": "DEEP",
+        "file": "AEGIS-D-20260616-0020.html"
+      },
+      {
         "tariff": "START",
         "file": "AEGIS-S-20260615-1848.html"
       },
       {
+        "tariff": "START",
+        "file": "AEGIS-S-20260615-2257.html"
+      },
+      {
+        "tariff": "START",
+        "file": "AEGIS-S-20260615-2302.html"
+      },
+      {
+        "tariff": "START",
+        "file": "AEGIS-S-20260615-2354.html"
+      },
+      {
+        "tariff": "START",
+        "file": "AEGIS-S-20260616-0020.html"
+      },
+      {
+        "tariff": "START",
+        "file": "AEGIS-S-20260616-0029.html"
+      },
+      {
         "tariff": "VERIFY",
         "file": "AEGIS-V-20260615-2238.html"
+      },
+      {
+        "tariff": "VERIFY",
+        "file": "AEGIS-V-20260615-2257.html"
+      },
+      {
+        "tariff": "VERIFY",
+        "file": "AEGIS-V-20260615-2310.html"
+      },
+      {
+        "tariff": "VERIFY",
+        "file": "AEGIS-V-20260615-2354.html"
+      },
+      {
+        "tariff": "VERIFY",
+        "file": "AEGIS-V-20260616-0020.html"
+      },
+      {
+        "tariff": "VERIFY",
+        "file": "AEGIS-V-20260616-0029.html"
       }
     ]
   },
@@ -147,66 +279,6 @@
     "domain": "transpizza.ru",
     "folder": "transpizza_ru",
     "reports": [
-      {
-        "tariff": "COMPLY",
-        "file": "AEGIS-C-20260615-2135.html"
-      },
-      {
-        "tariff": "COMPLY",
-        "file": "AEGIS-C-20260615-2136.html"
-      },
-      {
-        "tariff": "COMPLY",
-        "file": "AEGIS-C-20260615-2137.html"
-      },
-      {
-        "tariff": "COMPLY",
-        "file": "AEGIS-C-20260615-2138.html"
-      },
-      {
-        "tariff": "COMPLY",
-        "file": "AEGIS-C-20260615-2139.html"
-      },
-      {
-        "tariff": "COMPLY",
-        "file": "AEGIS-C-20260615-2142.html"
-      },
-      {
-        "tariff": "COMPLY",
-        "file": "AEGIS-C-20260615-2143.html"
-      },
-      {
-        "tariff": "COMPLY",
-        "file": "AEGIS-C-20260615-2145.html"
-      },
-      {
-        "tariff": "COMPLY",
-        "file": "AEGIS-C-20260615-2147.html"
-      },
-      {
-        "tariff": "COMPLY",
-        "file": "AEGIS-C-20260615-2155.html"
-      },
-      {
-        "tariff": "COMPLY",
-        "file": "AEGIS-C-20260615-2159.html"
-      },
-      {
-        "tariff": "COMPLY",
-        "file": "AEGIS-C-20260615-2203.html"
-      },
-      {
-        "tariff": "COMPLY",
-        "file": "AEGIS-C-20260615-2218.html"
-      },
-      {
-        "tariff": "COMPLY",
-        "file": "AEGIS-C-20260615-2223.html"
-      },
-      {
-        "tariff": "COMPLY",
-        "file": "AEGIS-C-20260615-2230.html"
-      },
       {
         "tariff": "START",
         "file": "AEGIS-S-20260615-1946.html"
