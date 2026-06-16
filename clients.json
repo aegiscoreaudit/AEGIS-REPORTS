@@ -417,18 +417,6 @@
         }
       },
       {
-        "tariff": "START",
-        "file": "AEGIS-S-20260617-0054.html",
-        "date": "2026-06-17T00:54:24.031388",
-        "size_kb": 76,
-        "vulns": {
-          "critical": 0,
-          "high": 3,
-          "medium": 6,
-          "low": 7
-        }
-      },
-      {
         "tariff": "VERIFY",
         "file": "AEGIS-V-20260617-0056.html",
         "date": "2026-06-17T00:56:26.575664",
@@ -451,9 +439,21 @@
           "medium": 6,
           "low": 6
         }
+      },
+      {
+        "tariff": "START",
+        "file": "AEGIS-S-20260617-0142.html",
+        "date": "2026-06-17T01:42:30.887150",
+        "size_kb": 77,
+        "vulns": {
+          "critical": 0,
+          "high": 5,
+          "medium": 6,
+          "low": 6
+        }
       }
     ],
-    "last_scan": "2026-06-17T01:01:21.704907",
+    "last_scan": "2026-06-17T01:42:30.887150",
     "total_vulns": {
       "critical": 0,
       "high": 5,
