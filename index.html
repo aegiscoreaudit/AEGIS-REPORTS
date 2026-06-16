@@ -1,66 +1,1391 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AEGIS CORE — Клиентские отчёты</title>
+<title>AEGIS REPORTS · Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root { --bg: #0A0C10; --card: #11141A; --border: rgba(255,255,255,0.06); --accent: #00D4FF; --green: #10B981; --text: #EAECEF; --muted: #8B949E; }
+:root {
+    --bg-deep: #0D1117;
+    --bg-card: #161B22;
+    --bg-surface: #1C2128;
+    --bg-hover: #21262D;
+    --border: rgba(255,255,255,0.06);
+    --border-accent: rgba(0,212,255,0.3);
+    --text-main: #E5E7EB;
+    --text-muted: #8B949E;
+    --accent: #00D4FF;
+    --danger: #EF4444;
+    --success: #10B981;
+    --warning: #F59E0B;
+    --critical: #DC2626;
+    --high: #F97316;
+    --medium: #FBBF24;
+    --low: #6B7280;
+    --font-ui: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+    --radius: 6px;
+    --radius-lg: 8px;
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; padding: 20px; }
-.container { max-width: 900px; margin: 0 auto; }
-h1 { font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
-.subtitle { font-size: 0.8rem; color: var(--muted); margin-bottom: 24px; }
-.client-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 12px; }
-.client-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 8px; }
-.report-links { display: flex; gap: 8px; flex-wrap: wrap; }
-.report-link { padding: 6px 14px; border-radius: 4px; text-decoration: none; font-size: 0.78rem; font-weight: 500; }
-.report-link.start { background: rgba(107,114,128,0.15); color: #6B7280; }
-.report-link.verify { background: rgba(0,240,255,0.12); color: #00F0FF; }
-.report-link.comply { background: rgba(0,230,118,0.12); color: #10B981; }
-.report-link.deep { background: rgba(239,68,68,0.12); color: #EF4444; }
-.empty { text-align: center; color: var(--muted); padding: 40px; }
-.footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 0.7rem; color: var(--muted); text-align: center; }
+
+html, body {
+    background: var(--bg-deep);
+    color: var(--text-main);
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* === АНИМАЦИИ === */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0,212,255,0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(0,212,255,0); }
+}
+@keyframes slideDown {
+    from { opacity: 0; max-height: 0; }
+    to { opacity: 1; max-height: 2000px; }
+}
+@keyframes toastIn {
+    from { transform: translateX(120%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* === HEADER === */
+.header {
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+}
+.header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-main);
+}
+.logo-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 8px rgba(0,212,255,0.3));
+}
+.logo-text h1 {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-family: var(--font-mono);
+}
+.logo-text .subtitle {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.3px;
+}
+.header-stats {
+    margin-left: auto;
+    display: flex;
+    gap: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+}
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+}
+.stat-item strong {
+    color: var(--accent);
+    font-weight: 700;
+}
+.btn-manage {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 8px 14px;
+    border-radius: var(--radius);
+    font-size: 12px;
+    font-family: var(--font-mono);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.btn-manage:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+.btn-manage.active {
+    background: rgba(239,68,68,0.1);
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+/* === CONTAINER === */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+/* === STATS PANEL === */
+.stats-panel {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+}
+.stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    transition: all 0.2s;
+}
+.stat-card:hover {
+    border-color: var(--border-accent);
+    transform: translateY(-2px);
+}
+.stat-card-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    font-family: var(--font-mono);
+}
+.stat-card-value {
+    font-size: 28px;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    line-height: 1;
+}
+.stat-card-value.accent { color: var(--accent); }
+.stat-card-value.danger { color: var(--danger); }
+.stat-card-value.success { color: var(--success); }
+.stat-card-value.warning { color: var(--warning); }
+
+/* === FILTERS === */
+.filters {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.search-box {
+    flex: 1;
+    min-width: 200px;
+    position: relative;
+}
+.search-box input {
+    width: 100%;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 10px 12px 10px 36px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-family: var(--font-ui);
+    outline: none;
+    transition: border-color 0.2s;
+}
+.search-box input:focus {
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "🔍";
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    pointer-events: none;
+    opacity: 0.6;
+}
+.tariff-filters {
+    display: flex;
+    gap: 6px;
+}
+.tariff-chip {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 8px 12px;
+    border-radius: var(--radius);
+    font-size: 11px;
+    font-family: var(--font-mono);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    user-select: none;
+}
+.tariff-chip:hover {
+    border-color: var(--border-accent);
+    color: var(--text-main);
+}
+.tariff-chip.active {
+    background: rgba(0,212,255,0.1);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+.tariff-chip .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+.tariff-chip[data-tariff="START"] .dot { background: var(--low); }
+.tariff-chip[data-tariff="VERIFY"] .dot { background: var(--warning); }
+.tariff-chip[data-tariff="COMPLY"] .dot { background: var(--success); }
+.tariff-chip[data-tariff="DEEP"] .dot { background: var(--danger); }
+
+.sort-select {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 8px 12px;
+    border-radius: var(--radius);
+    font-size: 12px;
+    font-family: var(--font-mono);
+    cursor: pointer;
+    outline: none;
+}
+.btn-reset {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 8px 12px;
+    border-radius: var(--radius);
+    font-size: 12px;
+    font-family: var(--font-mono);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.btn-reset:hover {
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+/* === TABLE === */
+.domains-table {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+.table-header {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr 1.5fr 0.7fr 1.3fr 1.2fr;
+    padding: 12px 16px;
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    gap: 12px;
+}
+.domain-row {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr 1.5fr 0.7fr 1.3fr 1.2fr;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+    gap: 12px;
+    transition: background 0.15s;
+    cursor: pointer;
+    animation: fadeInUp 0.3s ease-out backwards;
+}
+.domain-row:hover {
+    background: var(--bg-hover);
+}
+.domain-row:last-child {
+    border-bottom: none;
+}
+.domain-row.selected {
+    background: rgba(239,68,68,0.05);
+}
+.domain-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+.domain-favicon {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    background: var(--bg-surface);
+    flex-shrink: 0;
+}
+.domain-name {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text-main);
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.domain-name:hover {
+    color: var(--accent);
+}
+.last-audit {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+}
+.tariff-badges {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+.tariff-badge {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.tariff-badge.start {
+    background: rgba(107,114,128,0.15);
+    color: var(--low);
+    border: 1px solid rgba(107,114,128,0.3);
+}
+.tariff-badge.verify {
+    background: rgba(245,158,11,0.15);
+    color: var(--warning);
+    border: 1px solid rgba(245,158,11,0.3);
+}
+.tariff-badge.comply {
+    background: rgba(16,185,129,0.15);
+    color: var(--success);
+    border: 1px solid rgba(16,185,129,0.3);
+}
+.tariff-badge.deep {
+    background: rgba(239,68,68,0.15);
+    color: var(--danger);
+    border: 1px solid rgba(239,68,68,0.3);
+}
+.reports-count {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-main);
+    font-weight: 600;
+}
+.vuln-summary {
+    display: flex;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+}
+.vuln-chip {
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+}
+.vuln-chip.critical { background: rgba(220,38,38,0.15); color: var(--critical); }
+.vuln-chip.high { background: rgba(249,115,22,0.15); color: var(--high); }
+.vuln-chip.medium { background: rgba(251,191,36,0.15); color: var(--medium); }
+.vuln-chip.low { background: rgba(107,114,128,0.15); color: var(--low); }
+.row-actions {
+    display: flex;
+    gap: 6px;
+}
+.action-btn {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 6px 10px;
+    border-radius: var(--radius);
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+.action-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+.action-btn.danger:hover {
+    border-color: var(--danger);
+    color: var(--danger);
+}
+.delete-checkbox {
+    display: none;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--danger);
+    cursor: pointer;
+}
+.manage-mode .delete-checkbox {
+    display: block;
+}
+.manage-mode .row-actions .action-btn:not(.delete-btn) {
+    display: none;
+}
+
+/* === DETAILS PANEL === */
+.details-panel {
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 20px;
+    display: none;
+    animation: slideDown 0.3s ease-out;
+}
+.details-panel.open {
+    display: block;
+}
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+}
+.report-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: all 0.2s;
+}
+.report-card:hover {
+    border-color: var(--border-accent);
+}
+.report-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+.report-card-title {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+.report-card-date {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+}
+.report-card-meta {
+    display: flex;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+}
+.report-card-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: auto;
+}
+
+/* === EMPTY STATE === */
+.empty-state {
+    padding: 60px 20px;
+    text-align: center;
+    color: var(--text-muted);
+}
+.empty-state-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.4;
+}
+.empty-state-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 8px;
+}
+
+/* === MODAL === */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+.modal-overlay.open {
+    display: flex;
+}
+.modal {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    max-width: 500px;
+    width: 100%;
+    padding: 24px;
+    animation: fadeInUp 0.2s ease-out;
+}
+.modal-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.modal-body {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+.modal-warning {
+    background: rgba(239,68,68,0.1);
+    border: 1px solid rgba(239,68,68,0.3);
+    border-radius: var(--radius);
+    padding: 12px;
+    color: var(--danger);
+    font-size: 12px;
+    font-family: var(--font-mono);
+    margin-bottom: 16px;
+}
+.modal-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+.btn {
+    padding: 10px 16px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    border: 1px solid var(--border);
+    font-family: var(--font-ui);
+}
+.btn-secondary {
+    background: var(--bg-surface);
+    color: var(--text-main);
+}
+.btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+.btn-danger {
+    background: var(--danger);
+    color: white;
+    border-color: var(--danger);
+}
+.btn-danger:hover {
+    background: #DC2626;
+}
+
+/* === TOAST === */
+.toast-container {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.toast {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 280px;
+    animation: toastIn 0.3s ease-out;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+.toast.success { border-left: 3px solid var(--success); }
+.toast.error { border-left: 3px solid var(--danger); }
+.toast.info { border-left: 3px solid var(--accent); }
+
+/* === LOADING === */
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 12px;
+}
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 1024px) {
+    .stats-panel { grid-template-columns: repeat(2, 1fr); }
+    .table-header { display: none; }
+    .domain-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 16px;
+    }
+    .domain-row > * {
+        padding: 4px 0;
+    }
+    .domain-row::before {
+        content: attr(data-domain);
+        font-weight: 700;
+        font-size: 14px;
+        color: var(--accent);
+        font-family: var(--font-mono);
+    }
+}
+@media (max-width: 640px) {
+    .header-inner { flex-direction: column; align-items: flex-start; }
+    .header-stats { margin-left: 0; width: 100%; justify-content: space-between; }
+    .filters { flex-direction: column; align-items: stretch; }
+    .tariff-filters { flex-wrap: wrap; }
+    .stats-panel { grid-template-columns: 1fr; }
+    .container { padding: 16px; }
+}
 </style>
 </head>
 <body>
-<div class="container">
-    <h1>🛡 AEGIS CORE</h1>
-    <div class="subtitle">Клиентские отчёты аудита безопасности</div>
-    <div id="clients"></div>
-    <div class="footer">AEGIS CORE v8.4 · Автоматический аудит безопасности · 152-ФЗ</div>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="header-inner">
+        <a href="#" class="logo">
+            <svg class="logo-icon" viewBox="0 0 100 100" fill="none">
+                <defs>
+                    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#00E676"/>
+                        <stop offset="100%" stop-color="#00D4FF"/>
+                    </linearGradient>
+                </defs>
+                <path d="M25 80 L50 20 L75 80" stroke="url(#logoGrad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="37" y1="52" x2="63" y2="52" stroke="url(#logoGrad)" stroke-width="8" stroke-linecap="round"/>
+                <circle cx="50" cy="20" r="4" fill="url(#logoGrad)"/>
+            </svg>
+            <div class="logo-text">
+                <h1>AEGIS REPORTS</h1>
+                <div class="subtitle">Dashboard · Аудиты безопасности</div>
+            </div>
+        </a>
+        <div class="header-stats">
+            <div class="stat-item">🌐 <strong id="totalDomains">0</strong> доменов</div>
+            <div class="stat-item">📄 <strong id="totalReports">0</strong> отчётов</div>
+        </div>
+        <button class="btn-manage" id="btnManage" title="Режим управления">
+            <span>⚙️</span> Управление
+        </button>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- STATS PANEL -->
+    <div class="stats-panel">
+        <div class="stat-card">
+            <div class="stat-card-label">Всего доменов</div>
+            <div class="stat-card-value accent" id="statDomains">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-card-label">Всего отчётов</div>
+            <div class="stat-card-value" id="statReports">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-card-label">Критических</div>
+            <div class="stat-card-value danger" id="statCritical">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-card-label">Последний аудит</div>
+            <div class="stat-card-value success" id="statLastScan" style="font-size: 16px;">—</div>
+        </div>
+    </div>
+
+    <!-- FILTERS -->
+    <div class="filters">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Поиск по домену..." autocomplete="off">
+        </div>
+        <div class="tariff-filters" id="tariffFilters">
+            <div class="tariff-chip active" data-tariff="START"><span class="dot"></span>START</div>
+            <div class="tariff-chip active" data-tariff="VERIFY"><span class="dot"></span>VERIFY</div>
+            <div class="tariff-chip active" data-tariff="COMPLY"><span class="dot"></span>COMPLY</div>
+            <div class="tariff-chip active" data-tariff="DEEP"><span class="dot"></span>DEEP</div>
+        </div>
+        <select class="sort-select" id="sortSelect">
+            <option value="date-desc">Сначала новые</option>
+            <option value="date-asc">Сначала старые</option>
+            <option value="name-asc">А → Я</option>
+            <option value="name-desc">Я → А</option>
+            <option value="vulns-desc">По уязвимостям ↓</option>
+        </select>
+        <button class="btn-reset" id="btnReset">✕ Сбросить</button>
+    </div>
+    <!-- DOMAINS TABLE -->
+    <div class="domains-table" id="domainsTable">
+        <div class="table-header">
+            <div>Домен</div>
+            <div>Последний аудит</div>
+            <div>Тарифы</div>
+            <div>Отчётов</div>
+            <div>Уязвимостей</div>
+            <div>Действия</div>
+        </div>
+        <div id="domainsList">
+            <div class="loading">
+                <span class="loading-spinner"></span>
+                Загрузка данных из clients.json...
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<!-- DELETE MODAL -->
+<div class="modal-overlay" id="deleteModal">
+    <div class="modal">
+        <div class="modal-title">⚠️ Подтверждение удаления</div>
+        <div class="modal-body" id="deleteModalBody">
+            Вы собираетесь удалить выбранные элементы. Это действие необратимо.
+        </div>
+        <div class="modal-warning">
+            ⚠️ Файлы будут удалены из репозитория GitHub.<br>
+            Требуется настроенный GitHub Token в localStorage.
+        </div>
+        <div class="modal-actions">
+            <button class="btn btn-secondary" onclick="closeDeleteModal()">Отмена</button>
+            <button class="btn btn-danger" id="btnConfirmDelete">🗑 Удалить</button>
+        </div>
+    </div>
 </div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
+
 <script>
-async function loadClients() {
+// === STATE ===
+let clientsData = [];
+let filteredData = [];
+let activeTariffs = new Set(['START', 'VERIFY', 'COMPLY', 'DEEP']);
+let currentSort = 'date-desc';
+let searchQuery = '';
+let manageMode = false;
+let selectedItems = new Set();
+let expandedDomain = null;
+
+// === DEMO DATA (для статического превью) ===
+const DEMO_DATA = [
+    {
+        domain: "redpizza.ru",
+        folder: "redpizza_ru",
+        last_scan: "2026-06-16T08:17:00+03:00",
+        total_vulns: { critical: 2, high: 5, medium: 8, low: 4 },
+        reports: [
+            { tariff: "COMPLY", file: "AEGIS-C-20260616-0817.html", date: "2026-06-16T08:17:00+03:00", size_kb: 618, vulns: { critical: 2, high: 5, medium: 8, low: 4 } },
+            { tariff: "VERIFY", file: "AEGIS-V-20260616-0815.html", date: "2026-06-16T08:15:00+03:00", size_kb: 412, vulns: { critical: 2, high: 5, medium: 8, low: 4 } },
+            { tariff: "START", file: "AEGIS-S-20260616-0810.html", date: "2026-06-16T08:10:00+03:00", size_kb: 124, vulns: { critical: 2, high: 5, medium: 8, low: 4 } }
+        ]
+    },
+    {
+        domain: "shoko.ru",
+        folder: "shoko_ru",
+        last_scan: "2026-06-14T14:39:00+03:00",
+        total_vulns: { critical: 0, high: 1, medium: 5, low: 4 },
+        reports: [
+            { tariff: "VERIFY", file: "AEGIS-V-20260614-1439.html", date: "2026-06-14T14:39:00+03:00", size_kb: 389, vulns: { critical: 0, high: 1, medium: 5, low: 4 } },
+            { tariff: "START", file: "AEGIS-S-20260613-1212.html", date: "2026-06-13T12:12:00+03:00", size_kb: 98, vulns: { critical: 0, high: 1, medium: 5, low: 4 } }
+        ]
+    },
+    {
+        domain: "transpizza.ru",
+        folder: "transpizza_ru",
+        last_scan: "2026-06-14T23:43:00+03:00",
+        total_vulns: { critical: 0, high: 4, medium: 7, low: 9 },
+        reports: [
+            { tariff: "COMPLY", file: "AEGIS-C-20260614-2343.html", date: "2026-06-14T23:43:00+03:00", size_kb: 721, vulns: { critical: 0, high: 4, medium: 7, low: 9 } },
+            { tariff: "VERIFY", file: "AEGIS-V-20260614-0019.html", date: "2026-06-14T00:19:00+03:00", size_kb: 445, vulns: { critical: 0, high: 1, medium: 7, low: 3 } },
+            { tariff: "START", file: "AEGIS-S-20260613-1545.html", date: "2026-06-13T15:45:00+03:00", size_kb: 112, vulns: { critical: 0, high: 1, medium: 7, low: 3 } }
+        ]
+    },
+    {
+        domain: "intimhouse.ru",
+        folder: "intimhouse_ru",
+        last_scan: "2026-06-13T20:18:00+03:00",
+        total_vulns: { critical: 0, high: 3, medium: 6, low: 4 },
+        reports: [
+            { tariff: "VERIFY", file: "AEGIS-V-20260613-2018.html", date: "2026-06-13T20:18:00+03:00", size_kb: 467, vulns: { critical: 0, high: 3, medium: 6, low: 4 } }
+        ]
+    },
+    {
+        domain: "dveri.com",
+        folder: "dveri_com",
+        last_scan: "2026-06-13T02:53:00+03:00",
+        total_vulns: { critical: 0, high: 3, medium: 7, low: 4 },
+        reports: [
+            { tariff: "VERIFY", file: "AEGIS-V-20260613-0253.html", date: "2026-06-13T02:53:00+03:00", size_kb: 512, vulns: { critical: 0, high: 3, medium: 7, low: 4 } },
+            { tariff: "START", file: "AEGIS-S-20260613-0258.html", date: "2026-06-13T02:58:00+03:00", size_kb: 134, vulns: { critical: 0, high: 3, medium: 7, low: 4 } }
+        ]
+    },
+    {
+        domain: "intim-magazin.ru",
+        folder: "intim_magazin_ru",
+        last_scan: "2026-06-13T15:47:00+03:00",
+        total_vulns: { critical: 0, high: 0, medium: 6, low: 5 },
+        reports: [
+            { tariff: "VERIFY", file: "AEGIS-V-20260613-1547.html", date: "2026-06-13T15:47:00+03:00", size_kb: 398, vulns: { critical: 0, high: 0, medium: 6, low: 5 } },
+            { tariff: "START", file: "AEGIS-S-20260613-1545.html", date: "2026-06-13T15:45:00+03:00", size_kb: 108, vulns: { critical: 0, high: 0, medium: 6, low: 5 } }
+        ]
+    },
+    {
+        domain: "lavkafreida.ru",
+        folder: "lavkafreida_ru",
+        last_scan: "2026-06-13T18:54:00+03:00",
+        total_vulns: { critical: 0, high: 2, medium: 6, low: 3 },
+        reports: [
+            { tariff: "VERIFY", file: "AEGIS-V-20260613-1854.html", date: "2026-06-13T18:54:00+03:00", size_kb: 423, vulns: { critical: 0, high: 2, medium: 6, low: 3 } }
+        ]
+    },
+    {
+        domain: "autodoc.ru",
+        folder: "autodoc_ru",
+        last_scan: "2026-06-13T12:15:00+03:00",
+        total_vulns: { critical: 0, high: 1, medium: 5, low: 4 },
+        reports: [
+            { tariff: "VERIFY", file: "AEGIS-V-20260613-1215.html", date: "2026-06-13T12:15:00+03:00", size_kb: 456, vulns: { critical: 0, high: 1, medium: 5, low: 4 } }
+        ]
+    }
+];
+
+// === UTILS ===
+function formatDate(isoStr) {
+    if (!isoStr) return '—';
+    const d = new Date(isoStr);
+    const pad = n => String(n).padStart(2, '0');
+    return `${pad(d.getDate())}.${pad(d.getMonth()+1)}.${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+function formatDateShort(isoStr) {
+    if (!isoStr) return '—';
+    const d = new Date(isoStr);
+    const pad = n => String(n).padStart(2, '0');
+    return `${pad(d.getDate())}.${pad(d.getMonth()+1)}.${d.getFullYear()}`;
+}
+
+function formatSize(kb) {
+    if (kb < 1024) return `${kb} KB`;
+    return `${(kb/1024).toFixed(1)} MB`;
+}
+
+function getFaviconUrl(domain) {
+    return `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
+}
+
+function getTotalVulns(client) {
+    const v = client.total_vulns || {};
+    return (v.critical||0) + (v.high||0) + (v.medium||0) + (v.low||0);
+}
+
+function getTariffs(client) {
+    return [...new Set(client.reports.map(r => r.tariff))];
+}
+
+function showToast(message, type = 'info') {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    const icons = { success: '✓', error: '✕', info: 'ℹ' };
+    toast.innerHTML = `<span>${icons[type] || 'ℹ'}</span><span>${message}</span>`;
+    container.appendChild(toast);
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(120%)';
+        toast.style.transition = 'all 0.3s';
+        setTimeout(() => toast.remove(), 300);
+    }, 3500);
+}
+
+// === DATA LOADING ===
+async function loadData() {
     try {
-        const resp = await fetch('clients.json');
-        const clients = await resp.json();
-        renderClients(clients);
-    } catch(e) {
-        document.getElementById('clients').innerHTML = '<div class="empty">⚠️ Не удалось загрузить clients.json</div>';
+        const response = await fetch('clients.json', { cache: 'no-cache' });
+        if (!response.ok) throw new Error('clients.json not found');
+        clientsData = await response.json();
+        if (!Array.isArray(clientsData)) throw new Error('Invalid data format');
+        showToast(`Загружено ${clientsData.length} доменов`, 'success');
+    } catch (e) {
+        console.warn('Using demo data:', e.message);
+        clientsData = DEMO_DATA;
+        showToast('Демо-режим: clients.json не найден', 'info');
+    }
+    applyFilters();
+    updateStats();
+}
+
+// === STATS ===
+function updateStats() {
+    const totalDomains = clientsData.length;
+    const totalReports = clientsData.reduce((sum, c) => sum + c.reports.length, 0);
+    const totalCritical = clientsData.reduce((sum, c) => sum + (c.total_vulns?.critical || 0), 0);
+    
+    const lastScans = clientsData.map(c => new Date(c.last_scan)).filter(d => !isNaN(d));
+    const lastScan = lastScans.length ? new Date(Math.max(...lastScans)) : null;
+    
+    document.getElementById('statDomains').textContent = totalDomains;
+    document.getElementById('statReports').textContent = totalReports;
+    document.getElementById('statCritical').textContent = totalCritical;
+    document.getElementById('statLastScan').textContent = lastScan ? formatDateShort(lastScan.toISOString()) : '—';
+    document.getElementById('totalDomains').textContent = totalDomains;
+    document.getElementById('totalReports').textContent = totalReports;
+}
+
+// === FILTERING & SORTING ===
+function applyFilters() {
+    filteredData = clientsData.filter(client => {
+        if (searchQuery && !client.domain.toLowerCase().includes(searchQuery.toLowerCase())) {
+            return false;
+        }
+        const clientTariffs = getTariffs(client);
+        if (!clientTariffs.some(t => activeTariffs.has(t))) {
+            return false;
+        }
+        return true;
+    });
+    
+    filteredData.sort((a, b) => {
+        switch (currentSort) {
+            case 'date-desc': return new Date(b.last_scan) - new Date(a.last_scan);
+            case 'date-asc': return new Date(a.last_scan) - new Date(b.last_scan);
+            case 'name-asc': return a.domain.localeCompare(b.domain, 'ru');
+            case 'name-desc': return b.domain.localeCompare(a.domain, 'ru');
+            case 'vulns-desc': return getTotalVulns(b) - getTotalVulns(a);
+            default: return 0;
+        }
+    });
+    
+    renderTable();
+}
+
+// === RENDER ===
+function renderTable() {
+    const container = document.getElementById('domainsList');
+    
+    if (filteredData.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">🔍</div>
+                <div class="empty-state-title">Ничего не найдено</div>
+                <div>Попробуйте изменить параметры поиска или сбросить фильтры</div>
+            </div>
+        `;
+        return;
+    }
+container.innerHTML = filteredData.map((client, idx) => {
+        const tariffs = getTariffs(client);
+        const totalVulns = getTotalVulns(client);
+        const v = client.total_vulns || {};
+        const isSelected = selectedItems.has(client.domain);
+        const isExpanded = expandedDomain === client.domain;
+        
+        return `
+            <div class="domain-row ${isSelected ? 'selected' : ''}" 
+                 data-domain="${client.domain}" 
+                 data-idx="${idx}"
+                 style="animation-delay: ${idx * 0.03}s">
+                <div class="domain-info">
+                    <input type="checkbox" class="delete-checkbox" ${isSelected ? 'checked' : ''} 
+                           onclick="event.stopPropagation(); toggleSelect('${client.domain}')">
+                    <img class="domain-favicon" src="${getFaviconUrl(client.domain)}" alt="" onerror="this.style.opacity=0.3">
+                    <a href="https://${client.domain}" target="_blank" rel="noopener" class="domain-name" onclick="event.stopPropagation()">
+                        ${client.domain}
+                    </a>
+                </div>
+                <div class="last-audit">${formatDate(client.last_scan)}</div>
+                <div class="tariff-badges">
+                    ${tariffs.map(t => `<span class="tariff-badge ${t.toLowerCase()}">${t}</span>`).join('')}
+                </div>
+                <div class="reports-count">${client.reports.length}</div>
+                <div class="vuln-summary">
+                    ${v.critical ? `<span class="vuln-chip critical">${v.critical}C</span>` : ''}
+                    ${v.high ? `<span class="vuln-chip high">${v.high}H</span>` : ''}
+                    ${v.medium ? `<span class="vuln-chip medium">${v.medium}M</span>` : ''}
+                    ${v.low ? `<span class="vuln-chip low">${v.low}L</span>` : ''}
+                </div>
+                <div class="row-actions">
+                    <button class="action-btn" onclick="event.stopPropagation(); toggleDetails('${client.domain}')" title="Подробнее">
+                        ${isExpanded ? '▲' : '▼'} Детали
+                    </button>
+                    <a class="action-btn" href="${client.folder}/${client.reports[0].file}" target="_blank" onclick="event.stopPropagation()" title="Открыть последний">
+                        📄
+                    </a>
+                    <button class="action-btn danger delete-btn" onclick="event.stopPropagation(); confirmDelete('${client.domain}')" title="Удалить">
+                        🗑
+                    </button>
+                </div>
+                ${isExpanded ? renderDetailsPanel(client) : ''}
+            </div>
+        `;
+    }).join('');
+    
+    // Click on row to expand
+    document.querySelectorAll('.domain-row').forEach(row => {
+        row.addEventListener('click', () => {
+            const domain = row.dataset.domain;
+            toggleDetails(domain);
+        });
+    });
+}
+
+function renderDetailsPanel(client) {
+    const reportsByTariff = {};
+    client.reports.forEach(r => {
+        if (!reportsByTariff[r.tariff]) reportsByTariff[r.tariff] = [];
+        reportsByTariff[r.tariff].push(r);
+    });
+    
+    const tariffOrder = ['DEEP', 'COMPLY', 'VERIFY', 'START'];
+    
+    return `
+        <div class="details-panel open">
+            <div class="details-grid">
+                ${tariffOrder.map(tariff => {
+                    const reports = reportsByTariff[tariff];
+                    if (!reports) return '';
+                    return reports.map(r => `
+                        <div class="report-card">
+                            <div class="report-card-header">
+                                <span class="tariff-badge ${tariff.toLowerCase()}">${tariff}</span>
+                                <span class="report-card-date">${formatDate(r.date)}</span>
+                            </div>
+                            <div class="report-card-title">${r.file}</div>
+                            <div class="report-card-meta">
+                                <span>📦 ${formatSize(r.size_kb)}</span>
+                                <span>🎯 ${getTotalVulnsFromObj(r.vulns)} уязв.</span>
+                            </div>
+                            <div class="report-card-actions">
+                                <a class="action-btn" href="${client.folder}/${r.file}" target="_blank">
+                                    👁 Просмотр
+                                </a>
+                                <a class="action-btn" href="${client.folder}/${r.file}" download>
+                                    ⬇ Скачать
+                                </a>
+                                <button class="action-btn danger" onclick="confirmDeleteReport('${client.domain}', '${r.file}')">
+                                    🗑
+                                </button>
+                            </div>
+                        </div>
+                    `).join('');
+                }).join('')}
+            </div>
+        </div>
+    `;
+}
+
+function getTotalVulnsFromObj(v) {
+    if (!v) return 0;
+    return (v.critical||0) + (v.high||0) + (v.medium||0) + (v.low||0);
+}
+
+// === INTERACTIONS ===
+function toggleDetails(domain) {
+    expandedDomain = expandedDomain === domain ? null : domain;
+    renderTable();
+}
+
+function toggleSelect(domain) {
+    if (selectedItems.has(domain)) {
+        selectedItems.delete(domain);
+    } else {
+        selectedItems.add(domain);
+    }
+    renderTable();
+    updateManageButton();
+}
+
+function updateManageButton() {
+    const btn = document.getElementById('btnManage');
+    if (selectedItems.size > 0) {
+        btn.textContent = `⚙️ Удалить (${selectedItems.size})`;
+        btn.classList.add('active');
+    } else {
+        btn.innerHTML = '<span>⚙️</span> Управление';
+        btn.classList.remove('active');
     }
 }
 
-function renderClients(clients) {
-    const container = document.getElementById('clients');
-    if (!clients.length) {
-        container.innerHTML = '<div class="empty">Нет клиентских отчётов</div>';
+function confirmDelete(domain) {
+    selectedItems.clear();
+    selectedItems.add(domain);
+    openDeleteModal();
+}
+
+function confirmDeleteReport(domain, file) {
+    selectedItems.clear();
+    selectedItems.add(`${domain}::${file}`);
+    openDeleteModal();
+}
+
+function openDeleteModal() {
+    const modal = document.getElementById('deleteModal');
+    const body = document.getElementById('deleteModalBody');
+    
+    const items = [...selectedItems];
+    const domains = items.filter(i => !i.includes('::'));
+    const reports = items.filter(i => i.includes('::'));
+    
+    let msg = '';
+    if (domains.length) {
+        msg += `<div>Домены: <strong>${domains.join(', ')}</strong></div>`;
+    }
+    if (reports.length) {
+        msg += `<div style="margin-top:8px">Отчёты: <strong>${reports.map(r => r.split('::')[1]).join(', ')}</strong></div>`;
+    }
+    body.innerHTML = msg || 'Выбраны элементы для удаления.';
+    
+    modal.classList.add('open');
+}
+
+function closeDeleteModal() {
+    document.getElementById('deleteModal').classList.remove('open');
+}
+
+async function performDelete() {
+    const token = localStorage.getItem('github_token');
+    const repo = localStorage.getItem('github_repo');
+    
+    if (!token || !repo) {
+        showToast('GitHub Token не настроен. Используйте демо-режим.', 'error');
+        setTimeout(() => {
+            showToast('В реальности файлы не удаляются', 'info');
+        }, 500);
+        closeDeleteModal();
+        selectedItems.clear();
+        updateManageButton();
+        renderTable();
         return;
     }
     
-    container.innerHTML = clients.map(c => {
-        const reports = c.reports.map(r => {
-            const cls = r.tariff.toLowerCase();
-            return `<a href="${c.folder}/${r.file}" class="report-link ${cls}">${r.tariff}</a>`;
-        }).join('');
-        return `<div class="client-card">
-            <div class="client-name">🌐 ${c.domain}</div>
-            <div class="report-links">${reports}</div>
-        </div>`;
-    }).join('');
+    // Реальное удаление через GitHub API
+    try {
+        for (const item of selectedItems) {
+            if (item.includes('::')) {
+                const [domain, file] = item.split('::');
+                const client = clientsData.find(c => c.domain === domain);
+                if (client) {
+                    await deleteGitHubFile(repo, token, `${client.folder}/${file}`);
+                }
+            } else {
+                const client = clientsData.find(c => c.domain === item);
+                if (client) {
+                    for (const r of client.reports) {
+                        await deleteGitHubFile(repo, token, `${client.folder}/${r.file}`);
+                    }
+                }
+            }
+        }
+        
+        // Обновить clients.json
+        clientsData = clientsData.filter(c => !selectedItems.has(c.domain));
+        await updateClientsJson(repo, token);
+        
+        showToast(`Удалено: ${selectedItems.size}`, 'success');
+        selectedItems.clear();
+        updateManageButton();
+        applyFilters();
+        updateStats();
+    } catch (e) {
+        showToast('Ошибка удаления: ' + e.message, 'error');
+    }
+    
+    closeDeleteModal();
 }
 
-loadClients();
+async function deleteGitHubFile(repo, token, `po, token, path) {
+    const url = `https://api.github.com/repos/${repo}/contents/${path}`;
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: { 'Authorization': `token ${token}` }
+    });
+    if (!response.ok) return;
+    const data = await response.json();
+    
+    await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `token ${token}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            message: `Delete ${path}`,
+            sha: data.sha
+        })
+    });
+}
+
+async function updateClientsJson(repo, token) {
+    const url = `https://api.github.com/repos/${repo}/contents/clients.json`;
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(clientsData, null, 2))));
+    
+    let sha = null;
+    try {
+        const resp = await fetch(url, { headers: { 'Authorization': `token ${token}` } });
+        if (resp.ok) {
+            const data = await resp.json();
+            sha = data.sha;
+        }
+    } catch (e) {}
+    
+    const body = {
+        message: 'Update clients.json',
+        content: content
+    };
+    if (sha) body.sha = sha;
+    
+    await fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `token ${token}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    });
+}
+
+// === URL PARAMS ===
+function parseUrlParams() {
+    const params = new URLSearchParams(window.location.search);
+    const domain = params.get('domain');
+    const tariff = params.get('tariff');
+    
+    if (domain) {
+        searchQuery = domain;
+        document.getElementById('searchInput').value = domain;
+    }
+    if (tariff) {
+        activeTariffs.clear();
+        activeTariffs.add(tariff.toUpperCase());
+        document.querySelectorAll('.tariff-chip').forEach(chip => {
+            chip.classList.toggle('active', activeTariffs.has(chip.dataset.tariff));
+        });
+    }
+}
+
+// === EVENT LISTENERS ===
+document.getElementById('searchInput').addEventListener('input', (e) => {
+    searchQuery = e.target.value;
+    applyFilters();
+});
+
+document.getElementById('sortSelect').addEventListener('change', (e) => {
+    currentSort = e.target.value;
+    applyFilters();
+});
+
+document.getElementById('btnReset').addEventListener('click', () => {
+    searchQuery = '';
+    document.getElementById('searchInput').value = '';
+    activeTariffs = new Set(['START', 'VERIFY', 'COMPLY', 'DEEP']);
+    document.querySelectorAll('.tariff-chip').forEach(c => c.classList.add('active'));
+    currentSort = 'date-desc';
+    document.getElementById('sortSelect').value = 'date-desc';
+    applyFilters();
+    showToast('Фильтры сброшены', 'info');
+});
+
+document.querySelectorAll('.tariff-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+        const tariff = chip.dataset.tariff;
+        if (activeTariffs.has(tariff)) {
+            if (activeTariffs.size > 1) {
+                activeTariffs.delete(tariff);
+                chip.classList.remove('active');
+            }
+        } else {
+            activeTariffs.add(tariff);
+            chip.classList.add('active');
+        }
+        applyFilters();
+    });
+});
+
+document.getElementById('btnManage').addEventListener('click', () => {
+    manageMode = !manageMode;
+    document.getElementById('domainsTable').classList.toggle('manage-mode', manageMode);
+    if (!manageMode) {
+        selectedItems.clear();
+        updateManageButton();
+        renderTable();
+    } else {
+        showToast('Выберите элементы для удаления', 'info');
+    }
+});
+
+document.getElementById('btnConfirmDelete').addEventListener('click', performDelete);
+
+document.getElementById('deleteModal').addEventListener('click', (e) => {
+    if (e.target.id === 'deleteModal') closeDeleteModal();
+});
+
+// === INIT ===
+parseUrlParams();
+loadData();
+
+// Автообновление каждые 5 минут
+setInterval(() => {
+    if (!manageMode) loadData();
+}, 5 * 60 * 1000);
 </script>
+
 </body>
 </html>
