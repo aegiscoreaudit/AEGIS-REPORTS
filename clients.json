@@ -2,10 +2,10 @@
   {
     "domain": "dodopizza.ru",
     "folder": "dodopizza_ru",
-    "last_scan": "2026-06-16T14:28:43.855106",
+    "last_scan": "2026-06-16T14:32:18.004094",
     "total_vulns": {
       "critical": 0,
-      "high": 2,
+      "high": 4,
       "medium": 6,
       "low": 6
     },
@@ -15,18 +15,6 @@
         "file": "AEGIS-S-20260616-1421.html",
         "date": "2026-06-16T14:21:37.905124",
         "size_kb": 77,
-        "vulns": {
-          "critical": 0,
-          "high": 4,
-          "medium": 6,
-          "low": 6
-        }
-      },
-      {
-        "tariff": "COMPLY",
-        "file": "AEGIS-C-20260616-1421.html",
-        "date": "2026-06-16T14:21:49.171270",
-        "size_kb": 619,
         "vulns": {
           "critical": 0,
           "high": 4,
@@ -54,6 +42,18 @@
         "vulns": {
           "critical": 0,
           "high": 2,
+          "medium": 6,
+          "low": 6
+        }
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260616-1432.html",
+        "date": "2026-06-16T14:32:18.004094",
+        "size_kb": 621,
+        "vulns": {
+          "critical": 0,
+          "high": 4,
           "medium": 6,
           "low": 6
         }
