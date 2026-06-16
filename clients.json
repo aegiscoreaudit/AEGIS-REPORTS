@@ -11,7 +11,7 @@
     },
     "reports": [
       {
-        "tariff": "UNKNOWN",
+        "tariff": "VERIFY",
         "file": "AEGIS-V-20260616-0919.html",
         "date": "2026-06-16T09:19:55.899483",
         "size_kb": 210,
@@ -23,7 +23,7 @@
         }
       },
       {
-        "tariff": "UNKNOWN",
+        "tariff": "VERIFY",
         "file": "AEGIS-V-20260616-1205.html",
         "date": "2026-06-16T12:05:21.533659",
         "size_kb": 210,
@@ -35,7 +35,7 @@
         }
       },
       {
-        "tariff": "UNKNOWN",
+        "tariff": "VERIFY",
         "file": "AEGIS-V-20260616-1207.html",
         "date": "2026-06-16T12:07:00.213659",
         "size_kb": 210,
