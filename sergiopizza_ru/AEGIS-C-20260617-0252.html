@@ -1118,16 +1118,16 @@ HTTP 200  # Path Traversal
     
         <div class="finding-card" style="display:block;width:100%;margin-bottom:20px;border:1px solid var(--border);border-radius:8px;">
     <!-- Header -->
-    <div style="padding:14px 18px;background:rgba(255,107,53,0.1);display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:none;">
-        <span style="padding:2px 10px 4px 10px;border-radius:4px;font-weight:700;font-size:0.7rem;font-family:var(--font-mono);background:#FF6B35;color:#fff;">HIGH</span>
-        <span style="font-weight:600;font-size:0.95rem;flex:1;min-width:200px;color:var(--text-main);">⚠️ Админ-панель доступна из интернета</span>
-        <span style="font-family:var(--font-mono);font-size:0.6rem;font-weight:700;padding:3px 8px;border-radius:4px;background:rgba(255,107,53,0.12);color:#FF6B35;border:1px solid rgba(255,107,53,0.3);">COMPLY</span>
-        
-        <a href="https://cwe.mitre.org/data/definitions/285.html" target="_blank" style="font-family:var(--font-mono);font-size:0.7rem;color:var(--accent);text-decoration:none;">CWE-285</a>
+    <div style="padding:14px 18px;background:rgba(16,185,129,0.1);display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:none;">
+        <span style="padding:2px 10px 4px 10px;border-radius:4px;font-weight:700;font-size:0.7rem;font-family:var(--font-mono);background:#10B981;color:#fff;">MEDIUM</span>
+        <span style="font-weight:600;font-size:0.95rem;flex:1;min-width:200px;color:var(--text-main);">CSP Missing</span>
+        <span style="font-family:var(--font-mono);font-size:0.6rem;font-weight:700;padding:3px 8px;border-radius:4px;background:rgba(16,185,129,0.1);color:#10B981;border:1px solid rgba(16,185,129,0.3);">L2</span>
+        <span style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-muted);">CVSS 5.4</span>
+        <a href="https://cwe.mitre.org/data/definitions/1021.html" target="_blank" style="font-family:var(--font-mono);font-size:0.7rem;color:var(--accent);text-decoration:none;">CWE-1021</a>
     </div>
     <!-- Body -->
     <div style="padding:0 18px 16px 18px;">
-        <div style="color:#b0b0b0;font-size:0.88rem;line-height:1.6;margin-top:0;margin-bottom:4px;"><p>Админ-панель доступна из интернета: /bitrix/admin (HTTP 301).</p><p>Это нарушение 152-ФЗ ст.19 — не обеспечена защита от несанкционированного доступа.</p></div>
+        <div style="color:#b0b0b0;font-size:0.88rem;line-height:1.6;margin-top:0;margin-bottom:4px;"><p><strong>🔍 Что обнаружено:</strong> Заголовок <code>content-security-policy</code> отсутствует.</p><p><strong>⚠️ Риски:</strong> Раскрытие внутренней информации • Облегчение атак</p></div>
         <!-- Терминал -->
             <div style="font-family:var(--font-ui);font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:6px;">💻 Доказательство</div>
         <div style="background:#000000;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:20px;">
@@ -1137,8 +1137,8 @@ HTTP 200  # Path Traversal
                 <span style="width:10px;height:10px;border-radius:50%;background:#10B981;"></span>
                 <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--text-muted);margin-left:8px;">aegis_core_shell — zsh</span>
             </div>
-            <div class="poc-terminal" style="padding:4px 12px 4px 12px;font-family:monospace;font-size:13px;line-height:1.4;color:#E5E7EB;overflow-x:auto;white-space:pre;word-break:normal;max-width:100%;display:block;width:100%;"><span style="color:#4E9A06;font-weight:700;font-family:monospace;font-size:13px;">aegis@core</span><span style="color:#FFFFFF;font-family:monospace;font-size:13px;">:</span><span style="color:#34A2D9;font-weight:700;font-family:monospace;font-size:13px;">~</span><span style="color:#FFFFFF;font-family:monospace;font-size:13px;">$</span> curl -sI https://sergiopizza.ru/admin
-<span style="color:#E5E7EB;font-family:monospace;font-size:13px;">HTTP 200 — админка открыта</span></div>
+            <div class="poc-terminal" style="padding:4px 12px 4px 12px;font-family:monospace;font-size:13px;line-height:1.4;color:#E5E7EB;overflow-x:auto;white-space:pre;word-break:normal;max-width:100%;display:block;width:100%;"><span style="color:#4E9A06;font-weight:700;font-family:monospace;font-size:13px;">aegis@core</span><span style="color:#FFFFFF;font-family:monospace;font-size:13px;">:</span><span style="color:#34A2D9;font-weight:700;font-family:monospace;font-size:13px;">~</span><span style="color:#FFFFFF;font-family:monospace;font-size:13px;">$</span> curl -sI https://sergiopizza.ru | grep -i content-security-policy
+<span style="color:#E5E7EB;font-family:monospace;font-size:13px;">content-security-policy: не найден (L2)</span></div>
             
         </div>
         
@@ -1146,62 +1146,16 @@ HTTP 200  # Path Traversal
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
             <div style="padding:10px 14px;background:rgba(255,42,79,0.05);border-radius:6px;border:1px solid rgba(255,42,79,0.1);">
                 <div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;">💰 Ущерб</div>
-                <div style="font-weight:700;color:#FF2A4F;font-size:1.1rem;">100000 ₽</div>
+                <div style="font-weight:700;color:#FF2A4F;font-size:1.1rem;">50000 ₽</div>
             </div>
             <div style="padding:10px 14px;background:rgba(16,185,129,0.05);border-radius:6px;border:1px solid rgba(16,185,129,0.1);">
                 <div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;">✅ Исправление</div>
-                <div style="font-weight:700;color:#10B981;font-size:1.1rem;">0 ₽</div>
+                <div style="font-weight:700;color:#10B981;font-size:1.1rem;">1500 ₽</div>
             </div>
         </div>
         <!-- Solution -->
         
-        <div style="padding:12px 14px;background:rgba(16,185,129,0.05);border-left:3px solid #10B981;border-radius:4px;font-size:0.85rem;color:var(--text-main);line-height:1.5;word-break:break-word;overflow-wrap:break-word;max-width:100%;padding-left:20px;">Закрыть админ-панель по IP или VPN. Настроить rate-limiting на логин.</div>
-        
-    </div>
-</div>
-    
-
-    
-        <div class="finding-card" style="display:block;width:100%;margin-bottom:20px;border:1px solid var(--border);border-radius:8px;">
-    <!-- Header -->
-    <div style="padding:14px 18px;background:rgba(255,107,53,0.1);display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:none;">
-        <span style="padding:2px 10px 4px 10px;border-radius:4px;font-weight:700;font-size:0.7rem;font-family:var(--font-mono);background:#FF6B35;color:#fff;">HIGH</span>
-        <span style="font-weight:600;font-size:0.95rem;flex:1;min-width:200px;color:var(--text-main);">⚠️ План реагирования на инциденты не обнаружен</span>
-        <span style="font-family:var(--font-mono);font-size:0.6rem;font-weight:700;padding:3px 8px;border-radius:4px;background:rgba(255,107,53,0.12);color:#FF6B35;border:1px solid rgba(255,107,53,0.3);">COMPLY</span>
-        
-        <a href="https://cwe.mitre.org/data/definitions/693.html" target="_blank" style="font-family:var(--font-mono);font-size:0.7rem;color:var(--accent);text-decoration:none;">CWE-693</a>
-    </div>
-    <!-- Body -->
-    <div style="padding:0 18px 16px 18px;">
-        <div style="color:#b0b0b0;font-size:0.88rem;line-height:1.6;margin-top:0;margin-bottom:4px;"><p>Контакты для сообщений об инцидентах не найдены.</p></div>
-        <!-- Терминал -->
-            <div style="font-family:var(--font-ui);font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:6px;">💻 Доказательство</div>
-        <div style="background:#000000;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:20px;">
-            <div style="display:flex;align-items:center;gap:6px;padding:2px 10px;background:#0a0a0a;border-bottom:1px solid #1a1a1a;">
-                <span style="width:10px;height:10px;border-radius:50%;background:#FF2A4F;"></span>
-                <span style="width:10px;height:10px;border-radius:50%;background:#F59E0B;"></span>
-                <span style="width:10px;height:10px;border-radius:50%;background:#10B981;"></span>
-                <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--text-muted);margin-left:8px;">aegis_core_shell — zsh</span>
-            </div>
-            <div class="poc-terminal" style="padding:4px 12px 4px 12px;font-family:monospace;font-size:13px;line-height:1.4;color:#E5E7EB;overflow-x:auto;white-space:pre;word-break:normal;max-width:100%;display:block;width:100%;"><span style="color:#4E9A06;font-weight:700;font-family:monospace;font-size:13px;">aegis@core</span><span style="color:#FFFFFF;font-family:monospace;font-size:13px;">:</span><span style="color:#34A2D9;font-weight:700;font-family:monospace;font-size:13px;">~</span><span style="color:#FFFFFF;font-family:monospace;font-size:13px;">$</span> curl -sI https://sergiopizza.ru/.well-known/security.txt
-<span style="color:#E5E7EB;font-family:monospace;font-size:13px;">HTTP 404</span></div>
-            
-        </div>
-        
-        <!-- Impact -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
-            <div style="padding:10px 14px;background:rgba(255,42,79,0.05);border-radius:6px;border:1px solid rgba(255,42,79,0.1);">
-                <div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;">💰 Ущерб</div>
-                <div style="font-weight:700;color:#FF2A4F;font-size:1.1rem;">300000 ₽</div>
-            </div>
-            <div style="padding:10px 14px;background:rgba(16,185,129,0.05);border-radius:6px;border:1px solid rgba(16,185,129,0.1);">
-                <div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;">✅ Исправление</div>
-                <div style="font-weight:700;color:#10B981;font-size:1.1rem;">3000 ₽</div>
-            </div>
-        </div>
-        <!-- Solution -->
-        
-        <div style="padding:12px 14px;background:rgba(16,185,129,0.05);border-left:3px solid #10B981;border-radius:4px;font-size:0.85rem;color:var(--text-main);line-height:1.5;word-break:break-word;overflow-wrap:break-word;max-width:100%;padding-left:20px;">Создать security.txt или страницу /security с контактами.</div>
+        <div style="padding:12px 14px;background:rgba(16,185,129,0.05);border-left:3px solid #10B981;border-radius:4px;font-size:0.85rem;color:var(--text-main);line-height:1.5;word-break:break-word;overflow-wrap:break-word;max-width:100%;padding-left:20px;"><div style="font-weight:600;font-size:0.85rem;color:var(--text-main);margin-bottom:8px;">🛠 Как исправить</div><div style="margin-bottom:8px;font-size:0.85rem;color:var(--text-main);line-height:1.5;">Обратиться к разработчику: «Настройте Content Security Policy для защиты от XSS-атак»</div><div style="margin-top:8px;padding:8px 12px;background:var(--bg-terminal);border-radius:4px;font-size:0.8rem;"><div style="color:var(--accent);font-weight:600;margin-bottom:4px;">💻 Для разработчика (Nginx)</div><pre style="margin:0;padding:6px 8px;background:#0D1117;border-radius:3px;font-size:0.75rem;overflow-x:auto;white-space:pre-wrap;word-break:break-all;"><code>add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'" always;</code></pre></div><div style="margin-top:8px;font-size:0.8rem;color:var(--text-muted);">⏱ 1 час</div></div>
         
     </div>
 </div>
@@ -1358,6 +1312,98 @@ set-cookie: PHPSESSID=oss0bB24btoqnUtGW7JCJ3wini9AAI1I; path=/; HttpOnly</span><
 </ol>
 </div>
 <div style="margin-top:8px;font-size:0.8rem;color:var(--text-muted);">⏱ 15 минут</div></div>
+        
+    </div>
+</div>
+    
+
+    
+        <div class="finding-card" style="display:block;width:100%;margin-bottom:20px;border:1px solid var(--border);border-radius:8px;">
+    <!-- Header -->
+    <div style="padding:14px 18px;background:rgba(16,185,129,0.1);display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:none;">
+        <span style="padding:2px 10px 4px 10px;border-radius:4px;font-weight:700;font-size:0.7rem;font-family:var(--font-mono);background:#10B981;color:#fff;">MEDIUM</span>
+        <span style="font-weight:600;font-size:0.95rem;flex:1;min-width:200px;color:var(--text-main);">HSTS Missing</span>
+        <span style="font-family:var(--font-mono);font-size:0.6rem;font-weight:700;padding:3px 8px;border-radius:4px;background:rgba(16,185,129,0.1);color:#10B981;border:1px solid rgba(16,185,129,0.3);">L2</span>
+        <span style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-muted);">CVSS 5.0</span>
+        <a href="https://cwe.mitre.org/data/definitions/319.html" target="_blank" style="font-family:var(--font-mono);font-size:0.7rem;color:var(--accent);text-decoration:none;">CWE-319</a>
+    </div>
+    <!-- Body -->
+    <div style="padding:0 18px 16px 18px;">
+        <div style="color:#b0b0b0;font-size:0.88rem;line-height:1.6;margin-top:0;margin-bottom:4px;"><p><strong>🔍 Что обнаружено:</strong> Заголовок <code>strict-transport-security</code> отсутствует.</p><p><strong>⚠️ Риски:</strong> Раскрытие внутренней информации • Облегчение атак</p></div>
+        <!-- Терминал -->
+            <div style="font-family:var(--font-ui);font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:6px;">💻 Доказательство</div>
+        <div style="background:#000000;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:20px;">
+            <div style="display:flex;align-items:center;gap:6px;padding:2px 10px;background:#0a0a0a;border-bottom:1px solid #1a1a1a;">
+                <span style="width:10px;height:10px;border-radius:50%;background:#FF2A4F;"></span>
+                <span style="width:10px;height:10px;border-radius:50%;background:#F59E0B;"></span>
+                <span style="width:10px;height:10px;border-radius:50%;background:#10B981;"></span>
+                <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--text-muted);margin-left:8px;">aegis_core_shell — zsh</span>
+            </div>
+            <div class="poc-terminal" style="padding:4px 12px 4px 12px;font-family:monospace;font-size:13px;line-height:1.4;color:#E5E7EB;overflow-x:auto;white-space:pre;word-break:normal;max-width:100%;display:block;width:100%;"><span style="color:#4E9A06;font-weight:700;font-family:monospace;font-size:13px;">aegis@core</span><span style="color:#FFFFFF;font-family:monospace;font-size:13px;">:</span><span style="color:#34A2D9;font-weight:700;font-family:monospace;font-size:13px;">~</span><span style="color:#FFFFFF;font-family:monospace;font-size:13px;">$</span> curl -sI https://sergiopizza.ru | grep -i strict-transport-security
+<span style="color:#E5E7EB;font-family:monospace;font-size:13px;">strict-transport-security: не найден (L2)</span></div>
+            
+        </div>
+        
+        <!-- Impact -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+            <div style="padding:10px 14px;background:rgba(255,42,79,0.05);border-radius:6px;border:1px solid rgba(255,42,79,0.1);">
+                <div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;">💰 Ущерб</div>
+                <div style="font-weight:700;color:#FF2A4F;font-size:1.1rem;">50000 ₽</div>
+            </div>
+            <div style="padding:10px 14px;background:rgba(16,185,129,0.05);border-radius:6px;border:1px solid rgba(16,185,129,0.1);">
+                <div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;">✅ Исправление</div>
+                <div style="font-weight:700;color:#10B981;font-size:1.1rem;">400 ₽</div>
+            </div>
+        </div>
+        <!-- Solution -->
+        
+        <div style="padding:12px 14px;background:rgba(16,185,129,0.05);border-left:3px solid #10B981;border-radius:4px;font-size:0.85rem;color:var(--text-main);line-height:1.5;word-break:break-word;overflow-wrap:break-word;max-width:100%;padding-left:20px;"><div style="font-weight:600;font-size:0.85rem;color:var(--text-main);margin-bottom:8px;">🛠 Как исправить</div><div style="margin-bottom:8px;font-size:0.85rem;color:var(--text-main);line-height:1.5;">Обратиться к хостеру: «Включите HSTS для защиты от перехвата трафика»</div><div style="margin-top:8px;padding:8px 12px;background:var(--bg-terminal);border-radius:4px;font-size:0.8rem;"><div style="color:var(--accent);font-weight:600;margin-bottom:4px;">💻 Для разработчика (Nginx)</div><pre style="margin:0;padding:6px 8px;background:#0D1117;border-radius:3px;font-size:0.75rem;overflow-x:auto;white-space:pre-wrap;word-break:break-all;"><code>add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;</code></pre></div><div style="margin-top:8px;font-size:0.8rem;color:var(--text-muted);">⏱ 30 минут</div></div>
+        
+    </div>
+</div>
+    
+
+    
+        <div class="finding-card" style="display:block;width:100%;margin-bottom:20px;border:1px solid var(--border);border-radius:8px;">
+    <!-- Header -->
+    <div style="padding:14px 18px;background:rgba(16,185,129,0.1);display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:none;">
+        <span style="padding:2px 10px 4px 10px;border-radius:4px;font-weight:700;font-size:0.7rem;font-family:var(--font-mono);background:#10B981;color:#fff;">MEDIUM</span>
+        <span style="font-weight:600;font-size:0.95rem;flex:1;min-width:200px;color:var(--text-main);">X-Frame-Options Missing</span>
+        <span style="font-family:var(--font-mono);font-size:0.6rem;font-weight:700;padding:3px 8px;border-radius:4px;background:rgba(16,185,129,0.1);color:#10B981;border:1px solid rgba(16,185,129,0.3);">L2</span>
+        <span style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-muted);">CVSS 5.0</span>
+        <a href="https://cwe.mitre.org/data/definitions/1021.html" target="_blank" style="font-family:var(--font-mono);font-size:0.7rem;color:var(--accent);text-decoration:none;">CWE-1021</a>
+    </div>
+    <!-- Body -->
+    <div style="padding:0 18px 16px 18px;">
+        <div style="color:#b0b0b0;font-size:0.88rem;line-height:1.6;margin-top:0;margin-bottom:4px;"><p><strong>🔍 Что обнаружено:</strong> Заголовок <code>x-frame-options</code> отсутствует.</p><p><strong>⚠️ Риски:</strong> Раскрытие внутренней информации • Облегчение атак</p></div>
+        <!-- Терминал -->
+            <div style="font-family:var(--font-ui);font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:6px;">💻 Доказательство</div>
+        <div style="background:#000000;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:20px;">
+            <div style="display:flex;align-items:center;gap:6px;padding:2px 10px;background:#0a0a0a;border-bottom:1px solid #1a1a1a;">
+                <span style="width:10px;height:10px;border-radius:50%;background:#FF2A4F;"></span>
+                <span style="width:10px;height:10px;border-radius:50%;background:#F59E0B;"></span>
+                <span style="width:10px;height:10px;border-radius:50%;background:#10B981;"></span>
+                <span style="font-family:var(--font-mono);font-size:11px;font-weight:500;color:var(--text-muted);margin-left:8px;">aegis_core_shell — zsh</span>
+            </div>
+            <div class="poc-terminal" style="padding:4px 12px 4px 12px;font-family:monospace;font-size:13px;line-height:1.4;color:#E5E7EB;overflow-x:auto;white-space:pre;word-break:normal;max-width:100%;display:block;width:100%;"><span style="color:#4E9A06;font-weight:700;font-family:monospace;font-size:13px;">aegis@core</span><span style="color:#FFFFFF;font-family:monospace;font-size:13px;">:</span><span style="color:#34A2D9;font-weight:700;font-family:monospace;font-size:13px;">~</span><span style="color:#FFFFFF;font-family:monospace;font-size:13px;">$</span> curl -sI https://sergiopizza.ru | grep -i x-frame-options
+<span style="color:#E5E7EB;font-family:monospace;font-size:13px;">content-security-policy: не найден (L2)</span></div>
+            
+        </div>
+        
+        <!-- Impact -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+            <div style="padding:10px 14px;background:rgba(255,42,79,0.05);border-radius:6px;border:1px solid rgba(255,42,79,0.1);">
+                <div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;">💰 Ущерб</div>
+                <div style="font-weight:700;color:#FF2A4F;font-size:1.1rem;">50000 ₽</div>
+            </div>
+            <div style="padding:10px 14px;background:rgba(16,185,129,0.05);border-radius:6px;border:1px solid rgba(16,185,129,0.1);">
+                <div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;">✅ Исправление</div>
+                <div style="font-weight:700;color:#10B981;font-size:1.1rem;">200 ₽</div>
+            </div>
+        </div>
+        <!-- Solution -->
+        
+        <div style="padding:12px 14px;background:rgba(16,185,129,0.05);border-left:3px solid #10B981;border-radius:4px;font-size:0.85rem;color:var(--text-main);line-height:1.5;word-break:break-word;overflow-wrap:break-word;max-width:100%;padding-left:20px;"><div style="font-weight:600;font-size:0.85rem;color:var(--text-main);margin-bottom:8px;">🛠 Как исправить</div><div style="margin-bottom:8px;font-size:0.85rem;color:var(--text-main);line-height:1.5;">Обратиться к хостеру: «Включите защиту от clickjacking (X-Frame-Options)»</div><div style="margin-top:8px;padding:8px 12px;background:var(--bg-terminal);border-radius:4px;font-size:0.8rem;"><div style="color:var(--accent);font-weight:600;margin-bottom:4px;">💻 Для разработчика (Nginx)</div><pre style="margin:0;padding:6px 8px;background:#0D1117;border-radius:3px;font-size:0.75rem;overflow-x:auto;white-space:pre-wrap;word-break:break-all;"><code>add_header X-Frame-Options "DENY" always;</code></pre></div><div style="margin-top:8px;font-size:0.8rem;color:var(--text-muted);">⏱ 10 минут</div></div>
         
     </div>
 </div>
@@ -3427,7 +3473,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </footer>
 </div>
 <script>
-window.__AUTO_KEYS = ["encryption_checker", "spf_dmarc", "compliance_152fz_\u2705 \u041f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u043e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0438 \u041f\u0414\u043d \u043d\u0430\u0439\u0434\u0435", "ports", "encryption_checker_\u2705 HTTPS \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0435\u0442\u0441\u044f", "compliance_152fz"];
+window.__AUTO_KEYS = ["spf_dmarc", "compliance_152fz", "encryption_checker", "ports", "compliance_152fz_\u2705 \u041f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u043e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0438 \u041f\u0414\u043d \u043d\u0430\u0439\u0434\u0435", "encryption_checker_\u2705 HTTPS \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0435\u0442\u0441\u044f"];
 </script>
 </div>
 </body>
