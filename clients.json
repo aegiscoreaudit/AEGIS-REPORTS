@@ -2,210 +2,328 @@
   {
     "domain": "dodopizza.ru",
     "folder": "dodopizza_ru",
+    "last_scan": "2026-06-16T14:00:59.265735",
+    "total_vulns": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
     "reports": [
       {
         "tariff": "COMPLY",
-        "file": "AEGIS-C-20260615-2044.html"
+        "file": "AEGIS-C-20260615-2044.html",
+        "date": "2026-06-16T14:00:59.261735",
+        "size_kb": 650,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
       },
       {
         "tariff": "COMPLY",
-        "file": "AEGIS-C-20260616-1400.html"
-      }
-    ]
-  },
-  {
-    "domain": "inmyroom.ru",
-    "folder": "inmyroom_ru",
-    "reports": [
-      {
-        "tariff": "VERIFY",
-        "file": "AEGIS-V-20260615-1414.html"
+        "file": "AEGIS-C-20260616-1400.html",
+        "date": "2026-06-16T14:00:59.265735",
+        "size_kb": 621,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
       }
     ]
   },
   {
     "domain": "lavkafreida.ru",
     "folder": "lavkafreida_ru",
+    "last_scan": "2026-06-16T13:39:20.753118",
+    "total_vulns": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
     "reports": [
       {
         "tariff": "COMPLY",
-        "file": "AEGIS-C-20260615-2039.html"
+        "file": "AEGIS-C-20260615-2039.html",
+        "date": "2026-06-16T13:39:20.705118",
+        "size_kb": 592,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
       },
       {
         "tariff": "START",
-        "file": "AEGIS-S-20260616-1233.html"
+        "file": "AEGIS-S-20260616-1233.html",
+        "date": "2026-06-16T13:39:20.709118",
+        "size_kb": 77,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
       },
       {
         "tariff": "START",
-        "file": "AEGIS-S-20260616-1238.html"
+        "file": "AEGIS-S-20260616-1238.html",
+        "date": "2026-06-16T13:39:20.713118",
+        "size_kb": 77,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
       },
       {
         "tariff": "START",
-        "file": "AEGIS-S-20260616-1242.html"
+        "file": "AEGIS-S-20260616-1242.html",
+        "date": "2026-06-16T13:39:20.717118",
+        "size_kb": 77,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
       },
       {
         "tariff": "START",
-        "file": "AEGIS-S-20260616-1259.html"
+        "file": "AEGIS-S-20260616-1259.html",
+        "date": "2026-06-16T13:39:20.721118",
+        "size_kb": 77,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
       },
       {
         "tariff": "START",
-        "file": "AEGIS-S-20260616-1302.html"
+        "file": "AEGIS-S-20260616-1302.html",
+        "date": "2026-06-16T13:39:20.725118",
+        "size_kb": 77,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
       },
       {
         "tariff": "START",
-        "file": "AEGIS-S-20260616-1307.html"
+        "file": "AEGIS-S-20260616-1307.html",
+        "date": "2026-06-16T13:39:20.725118",
+        "size_kb": 77,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
       },
       {
         "tariff": "START",
-        "file": "AEGIS-S-20260616-1339.html"
+        "file": "AEGIS-S-20260616-1339.html",
+        "date": "2026-06-16T13:39:20.729118",
+        "size_kb": 77,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
       },
       {
         "tariff": "VERIFY",
-        "file": "AEGIS-V-20260616-1227.html"
+        "file": "AEGIS-V-20260616-1227.html",
+        "date": "2026-06-16T13:39:20.733118",
+        "size_kb": 179,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
       },
       {
         "tariff": "VERIFY",
-        "file": "AEGIS-V-20260616-1231.html"
+        "file": "AEGIS-V-20260616-1231.html",
+        "date": "2026-06-16T13:39:20.737118",
+        "size_kb": 179,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
       },
       {
         "tariff": "VERIFY",
-        "file": "AEGIS-V-20260616-1235.html"
+        "file": "AEGIS-V-20260616-1235.html",
+        "date": "2026-06-16T13:39:20.741118",
+        "size_kb": 179,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
       },
       {
         "tariff": "VERIFY",
-        "file": "AEGIS-V-20260616-1239.html"
+        "file": "AEGIS-V-20260616-1239.html",
+        "date": "2026-06-16T13:39:20.745118",
+        "size_kb": 179,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
       },
       {
         "tariff": "VERIFY",
-        "file": "AEGIS-V-20260616-1257.html"
+        "file": "AEGIS-V-20260616-1257.html",
+        "date": "2026-06-16T13:39:20.749118",
+        "size_kb": 179,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
       },
       {
         "tariff": "VERIFY",
-        "file": "AEGIS-V-20260616-1328.html"
+        "file": "AEGIS-V-20260616-1328.html",
+        "date": "2026-06-16T13:39:20.753118",
+        "size_kb": 179,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
       },
       {
         "tariff": "VERIFY",
-        "file": "AEGIS-V-20260616-1332.html"
-      }
-    ]
-  },
-  {
-    "domain": "magazinmebeli.net",
-    "folder": "magazinmebeli_net",
-    "reports": [
-      {
-        "tariff": "VERIFY",
-        "file": "AEGIS-V-20260615-1408.html"
-      }
-    ]
-  },
-  {
-    "domain": "mark-mebel.ru",
-    "folder": "mark-mebel_ru",
-    "reports": [
-      {
-        "tariff": "VERIFY",
-        "file": "AEGIS-V-20260615-1932.html"
-      }
-    ]
-  },
-  {
-    "domain": "meb-online.ru",
-    "folder": "meb-online_ru",
-    "reports": [
-      {
-        "tariff": "VERIFY",
-        "file": "AEGIS-V-20260615-1410.html"
-      }
-    ]
-  },
-  {
-    "domain": "mebel-1000.ru",
-    "folder": "mebel-1000_ru",
-    "reports": [
-      {
-        "tariff": "VERIFY",
-        "file": "AEGIS-V-20260615-1419.html"
-      }
-    ]
-  },
-  {
-    "domain": "mebel-sergiev-posad.ru",
-    "folder": "mebel-sergiev-posad_ru",
-    "reports": [
-      {
-        "tariff": "VERIFY",
-        "file": "AEGIS-V-20260615-1423.html"
+        "file": "AEGIS-V-20260616-1332.html",
+        "date": "2026-06-16T13:39:20.753118",
+        "size_kb": 179,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
       }
     ]
   },
   {
     "domain": "redpizza.ru",
     "folder": "redpizza_ru",
-    "reports": [
-      {
-        "tariff": "COMPLY",
-        "file": "AEGIS-C-20260616-0737.html"
-      },
-      {
-        "tariff": "COMPLY",
-        "file": "AEGIS-C-20260616-0747.html"
-      },
-      {
-        "tariff": "COMPLY",
-        "file": "AEGIS-C-20260616-0814.html"
-      },
-      {
-        "tariff": "COMPLY",
-        "file": "AEGIS-C-20260616-0815.html"
-      },
-      {
-        "tariff": "COMPLY",
-        "file": "AEGIS-C-20260616-0817.html"
-      },
-      {
-        "tariff": "VERIFY",
-        "file": "AEGIS-V-20260616-0919.html"
-      },
-      {
-        "tariff": "VERIFY",
-        "file": "AEGIS-V-20260616-1205.html"
-      },
-      {
-        "tariff": "VERIFY",
-        "file": "AEGIS-V-20260616-1207.html"
-      }
-    ]
-  },
-  {
-    "domain": "sergiopizza.ru",
-    "folder": "sergiopizza_ru",
+    "last_scan": "2026-06-16T12:07:00.213659",
+    "total_vulns": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
     "reports": [
       {
         "tariff": "VERIFY",
-        "file": "AEGIS-V-20260616-0029.html"
+        "file": "AEGIS-V-20260616-0919.html",
+        "date": "2026-06-16T09:19:55.899483",
+        "size_kb": 210,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
+      },
+      {
+        "tariff": "VERIFY",
+        "file": "AEGIS-V-20260616-1205.html",
+        "date": "2026-06-16T12:05:21.533659",
+        "size_kb": 210,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
+      },
+      {
+        "tariff": "VERIFY",
+        "file": "AEGIS-V-20260616-1207.html",
+        "date": "2026-06-16T12:07:00.213659",
+        "size_kb": 210,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
       }
     ]
   },
   {
     "domain": "transpizza.ru",
     "folder": "transpizza_ru",
+    "last_scan": "2026-06-16T12:54:02.347597",
+    "total_vulns": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
     "reports": [
       {
         "tariff": "START",
-        "file": "AEGIS-S-20260616-1248.html"
+        "file": "AEGIS-S-20260616-1248.html",
+        "date": "2026-06-16T12:48:15.279949",
+        "size_kb": 75,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
       },
       {
         "tariff": "START",
-        "file": "AEGIS-S-20260616-1254.html"
+        "file": "AEGIS-S-20260616-1254.html",
+        "date": "2026-06-16T12:54:02.347597",
+        "size_kb": 75,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
       },
       {
         "tariff": "VERIFY",
-        "file": "AEGIS-V-20260615-2223.html"
-      },
-      {
-        "tariff": "VERIFY",
-        "file": "AEGIS-V-20260616-1244.html"
+        "file": "AEGIS-V-20260616-1244.html",
+        "date": "2026-06-16T12:44:51.959949",
+        "size_kb": 210,
+        "vulns": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        }
       }
     ]
   }
