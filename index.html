@@ -1020,18 +1020,11 @@ function applyFilters() {
 // === RENDER ===
 function renderTable() {
     const container = document.getElementById('domainsList');
-    
     if (filteredData.length === 0) {
-        container.innerHTML = `
-            <div class="empty-state">
-                <div class="empty-state-icon">🔍</div>
-                <div class="empty-state-title">Ничего не найдено</div>
-                <div>Попробуйте изменить параметры поиска или сбросить фильтры</div>
-            </div>
-        `;
+        container.innerHTML = `<div class="empty-state"><div class="empty-state-icon">🔍</div><div class="empty-state-title">Ничего не найдено</div><div>Попробуйте изменить параметры поиска или сбросить фильтры</div></div>`;
         return;
     }
-container.innerHTML = filteredData.map((client, idx) => {
+    container.innerHTML = filteredData.map((client, idx) => {
         const tariffs = getTariffs(client);
         const totalVulns = getTotalVulns(client);
         const v = client.total_vulns || {};
