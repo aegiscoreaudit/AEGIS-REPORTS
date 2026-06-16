@@ -399,5 +399,30 @@
       "medium": 7,
       "low": 6
     }
+  },
+  {
+    "domain": "sergiopizza.ru",
+    "folder": "sergiopizza_ru",
+    "reports": [
+      {
+        "tariff": "START",
+        "file": "AEGIS-S-20260616-1747.html",
+        "date": "2026-06-16T17:47:51.428294",
+        "size_kb": 76,
+        "vulns": {
+          "critical": 0,
+          "high": 3,
+          "medium": 6,
+          "low": 7
+        }
+      }
+    ],
+    "last_scan": "2026-06-16T17:47:51.428294",
+    "total_vulns": {
+      "critical": 0,
+      "high": 3,
+      "medium": 6,
+      "low": 7
+    }
   }
 ]
