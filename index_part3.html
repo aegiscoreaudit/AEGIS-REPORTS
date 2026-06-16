@@ -1,0 +1,358 @@
+container.innerHTML = filteredData.map((client, idx) => {
+        const tariffs = getTariffs(client);
+        const totalVulns = getTotalVulns(client);
+        const v = client.total_vulns || {};
+        const isSelected = selectedItems.has(client.domain);
+        const isExpanded = expandedDomain === client.domain;
+        
+        return `
+            <div class="domain-row ${isSelected ? 'selected' : ''}" 
+                 data-domain="${client.domain}" 
+                 data-idx="${idx}"
+                 style="animation-delay: ${idx * 0.03}s">
+                <div class="domain-info">
+                    <input type="checkbox" class="delete-checkbox" ${isSelected ? 'checked' : ''} 
+                           onclick="event.stopPropagation(); toggleSelect('${client.domain}')">
+                    <img class="domain-favicon" src="${getFaviconUrl(client.domain)}" alt="" onerror="this.style.opacity=0.3">
+                    <a href="https://${client.domain}" target="_blank" rel="noopener" class="domain-name" onclick="event.stopPropagation()">
+                        ${client.domain}
+                    </a>
+                </div>
+                <div class="last-audit">${formatDate(client.last_scan)}</div>
+                <div class="tariff-badges">
+                    ${tariffs.map(t => `<span class="tariff-badge ${t.toLowerCase()}">${t}</span>`).join('')}
+                </div>
+                <div class="reports-count">${client.reports.length}</div>
+                <div class="vuln-summary">
+                    ${v.critical ? `<span class="vuln-chip critical">${v.critical}C</span>` : ''}
+                    ${v.high ? `<span class="vuln-chip high">${v.high}H</span>` : ''}
+                    ${v.medium ? `<span class="vuln-chip medium">${v.medium}M</span>` : ''}
+                    ${v.low ? `<span class="vuln-chip low">${v.low}L</span>` : ''}
+                </div>
+                <div class="row-actions">
+                    <button class="action-btn" onclick="event.stopPropagation(); toggleDetails('${client.domain}')" title="Подробнее">
+                        ${isExpanded ? '▲' : '▼'} Детали
+                    </button>
+                    <a class="action-btn" href="reports/${client.folder}/${client.reports[0].file}" target="_blank" onclick="event.stopPropagation()" title="Открыть последний">
+                        📄
+                    </a>
+                    <button class="action-btn danger delete-btn" onclick="event.stopPropagation(); confirmDelete('${client.domain}')" title="Удалить">
+                        🗑
+                    </button>
+                </div>
+                ${isExpanded ? renderDetailsPanel(client) : ''}
+            </div>
+        `;
+    }).join('');
+    
+    // Click on row to expand
+    document.querySelectorAll('.domain-row').forEach(row => {
+        row.addEventListener('click', () => {
+            const domain = row.dataset.domain;
+            toggleDetails(domain);
+        });
+    });
+}
+
+function renderDetailsPanel(client) {
+    const reportsByTariff = {};
+    client.reports.forEach(r => {
+        if (!reportsByTariff[r.tariff]) reportsByTariff[r.tariff] = [];
+        reportsByTariff[r.tariff].push(r);
+    });
+    
+    const tariffOrder = ['DEEP', 'COMPLY', 'VERIFY', 'START'];
+    
+    return `
+        <div class="details-panel open">
+            <div class="details-grid">
+                ${tariffOrder.map(tariff => {
+                    const reports = reportsByTariff[tariff];
+                    if (!reports) return '';
+                    return reports.map(r => `
+                        <div class="report-card">
+                            <div class="report-card-header">
+                                <span class="tariff-badge ${tariff.toLowerCase()}">${tariff}</span>
+                                <span class="report-card-date">${formatDate(r.date)}</span>
+                            </div>
+                            <div class="report-card-title">${r.file}</div>
+                            <div class="report-card-meta">
+                                <span>📦 ${formatSize(r.size_kb)}</span>
+                                <span>🎯 ${getTotalVulnsFromObj(r.vulns)} уязв.</span>
+                            </div>
+                            <div class="report-card-actions">
+                                <a class="action-btn" href="reports/${client.folder}/${r.file}" target="_blank">
+                                    👁 Просмотр
+                                </a>
+                                <a class="action-btn" href="reports/${client.folder}/${r.file}" download>
+                                    ⬇ Скачать
+                                </a>
+                                <button class="action-btn danger" onclick="confirmDeleteReport('${client.domain}', '${r.file}')">
+                                    🗑
+                                </button>
+                            </div>
+                        </div>
+                    `).join('');
+                }).join('')}
+            </div>
+        </div>
+    `;
+}
+
+function getTotalVulnsFromObj(v) {
+    if (!v) return 0;
+    return (v.critical||0) + (v.high||0) + (v.medium||0) + (v.low||0);
+}
+
+// === INTERACTIONS ===
+function toggleDetails(domain) {
+    expandedDomain = expandedDomain === domain ? null : domain;
+    renderTable();
+}
+
+function toggleSelect(domain) {
+    if (selectedItems.has(domain)) {
+        selectedItems.delete(domain);
+    } else {
+        selectedItems.add(domain);
+    }
+    renderTable();
+    updateManageButton();
+}
+
+function updateManageButton() {
+    const btn = document.getElementById('btnManage');
+    if (selectedItems.size > 0) {
+        btn.textContent = `⚙️ Удалить (${selectedItems.size})`;
+        btn.classList.add('active');
+    } else {
+        btn.innerHTML = '<span>⚙️</span> Управление';
+        btn.classList.remove('active');
+    }
+}
+
+function confirmDelete(domain) {
+    selectedItems.clear();
+    selectedItems.add(domain);
+    openDeleteModal();
+}
+
+function confirmDeleteReport(domain, file) {
+    selectedItems.clear();
+    selectedItems.add(`${domain}::${file}`);
+    openDeleteModal();
+}
+
+function openDeleteModal() {
+    const modal = document.getElementById('deleteModal');
+    const body = document.getElementById('deleteModalBody');
+    
+    const items = [...selectedItems];
+    const domains = items.filter(i => !i.includes('::'));
+    const reports = items.filter(i => i.includes('::'));
+    
+    let msg = '';
+    if (domains.length) {
+        msg += `<div>Домены: <strong>${domains.join(', ')}</strong></div>`;
+    }
+    if (reports.length) {
+        msg += `<div style="margin-top:8px">Отчёты: <strong>${reports.map(r => r.split('::')[1]).join(', ')}</strong></div>`;
+    }
+    body.innerHTML = msg || 'Выбраны элементы для удаления.';
+    
+    modal.classList.add('open');
+}
+
+function closeDeleteModal() {
+    document.getElementById('deleteModal').classList.remove('open');
+}
+
+async function performDelete() {
+    const token = localStorage.getItem('github_token');
+    const repo = localStorage.getItem('github_repo');
+    
+    if (!token || !repo) {
+        showToast('GitHub Token не настроен. Используйте демо-режим.', 'error');
+        setTimeout(() => {
+            showToast('В реальности файлы не удаляются', 'info');
+        }, 500);
+        closeDeleteModal();
+        selectedItems.clear();
+        updateManageButton();
+        renderTable();
+        return;
+    }
+    
+    // Реальное удаление через GitHub API
+    try {
+        for (const item of selectedItems) {
+            if (item.includes('::')) {
+                const [domain, file] = item.split('::');
+                const client = clientsData.find(c => c.domain === domain);
+                if (client) {
+                    await deleteGitHubFile(repo, token, `reports/${client.folder}/${file}`);
+                }
+            } else {
+                const client = clientsData.find(c => c.domain === item);
+                if (client) {
+                    for (const r of client.reports) {
+                        await deleteGitHubFile(repo, token, `reports/${client.folder}/${r.file}`);
+                    }
+                }
+            }
+        }
+        
+        // Обновить clients.json
+        clientsData = clientsData.filter(c => !selectedItems.has(c.domain));
+        await updateClientsJson(repo, token);
+        
+        showToast(`Удалено: ${selectedItems.size}`, 'success');
+        selectedItems.clear();
+        updateManageButton();
+        applyFilters();
+        updateStats();
+    } catch (e) {
+        showToast('Ошибка удаления: ' + e.message, 'error');
+    }
+    
+    closeDeleteModal();
+}
+
+async function deleteGitHubFile(repo, token, path) {
+    const url = `https://api.github.com/repos/${repo}/contents/${path}`;
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: { 'Authorization': `token ${token}` }
+    });
+    if (!response.ok) return;
+    const data = await response.json();
+    
+    await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `token ${token}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            message: `Delete ${path}`,
+            sha: data.sha
+        })
+    });
+}
+
+async function updateClientsJson(repo, token) {
+    const url = `https://api.github.com/repos/${repo}/contents/clients.json`;
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(clientsData, null, 2))));
+    
+    let sha = null;
+    try {
+        const resp = await fetch(url, { headers: { 'Authorization': `token ${token}` } });
+        if (resp.ok) {
+            const data = await resp.json();
+            sha = data.sha;
+        }
+    } catch (e) {}
+    
+    const body = {
+        message: 'Update clients.json',
+        content: content
+    };
+    if (sha) body.sha = sha;
+    
+    await fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `token ${token}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    });
+}
+
+// === URL PARAMS ===
+function parseUrlParams() {
+    const params = new URLSearchParams(window.location.search);
+    const domain = params.get('domain');
+    const tariff = params.get('tariff');
+    
+    if (domain) {
+        searchQuery = domain;
+        document.getElementById('searchInput').value = domain;
+    }
+    if (tariff) {
+        activeTariffs.clear();
+        activeTariffs.add(tariff.toUpperCase());
+        document.querySelectorAll('.tariff-chip').forEach(chip => {
+            chip.classList.toggle('active', activeTariffs.has(chip.dataset.tariff));
+        });
+    }
+}
+
+// === EVENT LISTENERS ===
+document.getElementById('searchInput').addEventListener('input', (e) => {
+    searchQuery = e.target.value;
+    applyFilters();
+});
+
+document.getElementById('sortSelect').addEventListener('change', (e) => {
+    currentSort = e.target.value;
+    applyFilters();
+});
+
+document.getElementById('btnReset').addEventListener('click', () => {
+    searchQuery = '';
+    document.getElementById('searchInput').value = '';
+    activeTariffs = new Set(['START', 'VERIFY', 'COMPLY', 'DEEP']);
+    document.querySelectorAll('.tariff-chip').forEach(c => c.classList.add('active'));
+    currentSort = 'date-desc';
+    document.getElementById('sortSelect').value = 'date-desc';
+    applyFilters();
+    showToast('Фильтры сброшены', 'info');
+});
+
+document.querySelectorAll('.tariff-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+        const tariff = chip.dataset.tariff;
+        if (activeTariffs.has(tariff)) {
+            if (activeTariffs.size > 1) {
+                activeTariffs.delete(tariff);
+                chip.classList.remove('active');
+            }
+        } else {
+            activeTariffs.add(tariff);
+            chip.classList.add('active');
+        }
+        applyFilters();
+    });
+});
+
+document.getElementById('btnManage').addEventListener('click', () => {
+    manageMode = !manageMode;
+    document.getElementById('domainsTable').classList.toggle('manage-mode', manageMode);
+    if (!manageMode) {
+        selectedItems.clear();
+        updateManageButton();
+        renderTable();
+    } else {
+        showToast('Выберите элементы для удаления', 'info');
+    }
+});
+
+document.getElementById('btnConfirmDelete').addEventListener('click', performDelete);
+
+document.getElementById('deleteModal').addEventListener('click', (e) => {
+    if (e.target.id === 'deleteModal') closeDeleteModal();
+});
+
+// === INIT ===
+parseUrlParams();
+loadData();
+
+// Автообновление каждые 5 минут
+setInterval(() => {
+    if (!manageMode) loadData();
+}, 5 * 60 * 1000);
+</script>
+
+</body>
+</html>
