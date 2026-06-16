@@ -1020,11 +1020,18 @@ function applyFilters() {
 // === RENDER ===
 function renderTable() {
     const container = document.getElementById('domainsList');
+    
     if (filteredData.length === 0) {
-        container.innerHTML = `<div class="empty-state"><div class="empty-state-icon">🔍</div><div class="empty-state-title">Ничего не найдено</div><div>Попробуйте изменить параметры поиска или сбросить фильтры</div></div>`;
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">🔍</div>
+                <div class="empty-state-title">Ничего не найдено</div>
+                <div>Попробуйте изменить параметры поиска или сбросить фильтры</div>
+            </div>
+        `;
         return;
     }
-    container.innerHTML = filteredData.map((client, idx) => {
+container.innerHTML = filteredData.map((client, idx) => {
         const tariffs = getTariffs(client);
         const totalVulns = getTotalVulns(client);
         const v = client.total_vulns || {};
@@ -1059,7 +1066,7 @@ function renderTable() {
                     <button class="action-btn" onclick="event.stopPropagation(); toggleDetails('${client.domain}')" title="Подробнее">
                         ${isExpanded ? '▲' : '▼'} Детали
                     </button>
-                    <a class="action-btn" href="${client.folder}/${client.reports[0].file}" target="_blank" onclick="event.stopPropagation()" title="Открыть последний">
+                    <a class="action-btn" href="reports/${client.folder}/${client.reports[0].file}" target="_blank" onclick="event.stopPropagation()" title="Открыть последний">
                         📄
                     </a>
                     <button class="action-btn danger delete-btn" onclick="event.stopPropagation(); confirmDelete('${client.domain}')" title="Удалить">
@@ -1107,10 +1114,10 @@ function renderDetailsPanel(client) {
                                 <span>🎯 ${getTotalVulnsFromObj(r.vulns)} уязв.</span>
                             </div>
                             <div class="report-card-actions">
-                                <a class="action-btn" href="${client.folder}/${r.file}" target="_blank">
+                                <a class="action-btn" href="reports/${client.folder}/${r.file}" target="_blank">
                                     👁 Просмотр
                                 </a>
-                                <a class="action-btn" href="${client.folder}/${r.file}" download>
+                                <a class="action-btn" href="reports/${client.folder}/${r.file}" download>
                                     ⬇ Скачать
                                 </a>
                                 <button class="action-btn danger" onclick="confirmDeleteReport('${client.domain}', '${r.file}')">
@@ -1216,13 +1223,13 @@ async function performDelete() {
                 const [domain, file] = item.split('::');
                 const client = clientsData.find(c => c.domain === domain);
                 if (client) {
-                    await deleteGitHubFile(repo, token, `${client.folder}/${file}`);
+                    await deleteGitHubFile(repo, token, `reports/${client.folder}/${file}`);
                 }
             } else {
                 const client = clientsData.find(c => c.domain === item);
                 if (client) {
                     for (const r of client.reports) {
-                        await deleteGitHubFile(repo, token, `${client.folder}/${r.file}`);
+                        await deleteGitHubFile(repo, token, `reports/${client.folder}/${r.file}`);
                     }
                 }
             }
@@ -1244,7 +1251,7 @@ async function performDelete() {
     closeDeleteModal();
 }
 
-async function deleteGitHubFile(repo, token, `po, token, path) {
+async function deleteGitHubFile(repo, token, path) {
     const url = `https://api.github.com/repos/${repo}/contents/${path}`;
     const response = await fetch(url, {
         method: 'GET',
