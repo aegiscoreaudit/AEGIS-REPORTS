@@ -5,24 +5,13 @@
     "reports": [
       {
         "tariff": "COMPLY",
-        "file": "AEGIS-C-20260616-1400.html",
-        "date": "2026-06-16T14:00:54.494307",
-        "size_kb": 621,
-        "vulns": {
-          "critical": 0,
-          "high": 4,
-          "medium": 6,
-          "low": 6
-        }
+        "file": "AEGIS-C-20260615-2044.html"
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260616-1400.html"
       }
-    ],
-    "last_scan": "2026-06-16T14:00:54.494307",
-    "total_vulns": {
-      "critical": 0,
-      "high": 4,
-      "medium": 6,
-      "low": 6
-    }
+    ]
   },
   {
     "domain": "inmyroom.ru",
