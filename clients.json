@@ -529,21 +529,21 @@
       },
       {
         "tariff": "VERIFY",
-        "file": "AEGIS-V-20260617-1415.html",
-        "date": "2026-06-17T14:15:57.059778",
-        "size_kb": 204,
+        "file": "AEGIS-V-20260617-1427.html",
+        "date": "2026-06-17T14:27:15.439288",
+        "size_kb": 228,
         "vulns": {
           "critical": 0,
-          "high": 3,
+          "high": 4,
           "medium": 7,
           "low": 6
         }
       }
     ],
-    "last_scan": "2026-06-17T14:15:57.059778",
+    "last_scan": "2026-06-17T14:27:15.439288",
     "total_vulns": {
       "critical": 0,
-      "high": 3,
+      "high": 4,
       "medium": 7,
       "low": 6
     }
