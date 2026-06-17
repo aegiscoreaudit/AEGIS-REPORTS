@@ -529,8 +529,8 @@
       },
       {
         "tariff": "COMPLY",
-        "file": "AEGIS-C-20260617-1752.html",
-        "date": "2026-06-17T17:52:58.801009",
+        "file": "AEGIS-C-20260617-1815.html",
+        "date": "2026-06-17T18:15:58.151068",
         "size_kb": 712,
         "vulns": {
           "critical": 0,
@@ -540,7 +540,7 @@
         }
       }
     ],
-    "last_scan": "2026-06-17T17:52:58.801009",
+    "last_scan": "2026-06-17T18:15:58.151068",
     "total_vulns": {
       "critical": 0,
       "high": 4,
