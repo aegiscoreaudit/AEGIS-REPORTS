@@ -184,7 +184,7 @@
   {
     "domain": "redpizza.ru",
     "folder": "redpizza_ru",
-    "last_scan": "2026-06-17T12:10:36.839121",
+    "last_scan": "2026-06-17T12:10:43.616855",
     "total_vulns": {
       "critical": 0,
       "high": 3,
@@ -209,6 +209,18 @@
         "file": "AEGIS-V-20260617-1210.html",
         "date": "2026-06-17T12:10:36.839121",
         "size_kb": 214,
+        "vulns": {
+          "critical": 0,
+          "high": 3,
+          "medium": 8,
+          "low": 7
+        }
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260617-1210.html",
+        "date": "2026-06-17T12:10:43.616855",
+        "size_kb": 665,
         "vulns": {
           "critical": 0,
           "high": 3,
