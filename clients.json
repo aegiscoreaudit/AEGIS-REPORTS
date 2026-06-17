@@ -449,5 +449,30 @@
       "medium": 6,
       "low": 6
     }
+  },
+  {
+    "domain": "prontopizza.ru",
+    "folder": "prontopizza_ru",
+    "reports": [
+      {
+        "tariff": "VERIFY",
+        "file": "AEGIS-V-20260617-1049.html",
+        "date": "2026-06-17T10:49:27.807961",
+        "size_kb": 196,
+        "vulns": {
+          "critical": 0,
+          "high": 3,
+          "medium": 3,
+          "low": 6
+        }
+      }
+    ],
+    "last_scan": "2026-06-17T10:49:27.807961",
+    "total_vulns": {
+      "critical": 0,
+      "high": 3,
+      "medium": 3,
+      "low": 6
+    }
   }
 ]
