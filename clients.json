@@ -184,12 +184,12 @@
   {
     "domain": "redpizza.ru",
     "folder": "redpizza_ru",
-    "last_scan": "2026-06-17T12:10:49.085044",
+    "last_scan": "2026-06-17T23:30:48.821039",
     "total_vulns": {
       "critical": 0,
-      "high": 3,
-      "medium": 8,
-      "low": 7
+      "high": 4,
+      "medium": 5,
+      "low": 8
     },
     "reports": [
       {
@@ -197,18 +197,6 @@
         "file": "AEGIS-S-20260617-1210.html",
         "date": "2026-06-17T12:10:29.919275",
         "size_kb": 77,
-        "vulns": {
-          "critical": 0,
-          "high": 3,
-          "medium": 8,
-          "low": 7
-        }
-      },
-      {
-        "tariff": "VERIFY",
-        "file": "AEGIS-V-20260617-1210.html",
-        "date": "2026-06-17T12:10:36.839121",
-        "size_kb": 214,
         "vulns": {
           "critical": 0,
           "high": 3,
@@ -238,6 +226,18 @@
           "high": 3,
           "medium": 8,
           "low": 7
+        }
+      },
+      {
+        "tariff": "VERIFY",
+        "file": "AEGIS-V-20260617-2330.html",
+        "date": "2026-06-17T23:30:48.821039",
+        "size_kb": 244,
+        "vulns": {
+          "critical": 0,
+          "high": 4,
+          "medium": 5,
+          "low": 8
         }
       }
     ]
