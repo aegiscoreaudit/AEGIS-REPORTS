@@ -466,18 +466,6 @@
     "folder": "dveri_com",
     "reports": [
       {
-        "tariff": "DEEP",
-        "file": "AEGIS-D-20260617-0959.html",
-        "date": "2026-06-17T09:59:39.243887",
-        "size_kb": 118,
-        "vulns": {
-          "critical": 0,
-          "high": 2,
-          "medium": 6,
-          "low": 6
-        }
-      },
-      {
         "tariff": "START",
         "file": "AEGIS-S-20260617-0959.html",
         "date": "2026-06-17T09:59:44.036857",
@@ -512,9 +500,21 @@
           "medium": 6,
           "low": 6
         }
+      },
+      {
+        "tariff": "DEEP",
+        "file": "AEGIS-D-20260617-0959.html",
+        "date": "2026-06-17T09:59:59.640826",
+        "size_kb": 118,
+        "vulns": {
+          "critical": 0,
+          "high": 2,
+          "medium": 6,
+          "low": 6
+        }
       }
     ],
-    "last_scan": "2026-06-17T09:59:54.642039",
+    "last_scan": "2026-06-17T09:59:59.640826",
     "total_vulns": {
       "critical": 0,
       "high": 2,
