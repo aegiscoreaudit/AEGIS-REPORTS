@@ -184,26 +184,14 @@
   {
     "domain": "redpizza.ru",
     "folder": "redpizza_ru",
-    "last_scan": "2026-06-17T23:30:48.821039",
+    "last_scan": "2026-06-18T16:34:37.720535",
     "total_vulns": {
       "critical": 0,
-      "high": 4,
-      "medium": 5,
+      "high": 3,
+      "medium": 3,
       "low": 8
     },
     "reports": [
-      {
-        "tariff": "START",
-        "file": "AEGIS-S-20260617-1210.html",
-        "date": "2026-06-17T12:10:29.919275",
-        "size_kb": 77,
-        "vulns": {
-          "critical": 0,
-          "high": 3,
-          "medium": 8,
-          "low": 7
-        }
-      },
       {
         "tariff": "COMPLY",
         "file": "AEGIS-C-20260617-1210.html",
@@ -229,14 +217,26 @@
         }
       },
       {
-        "tariff": "VERIFY",
-        "file": "AEGIS-V-20260617-2330.html",
-        "date": "2026-06-17T23:30:48.821039",
-        "size_kb": 244,
+        "tariff": "START",
+        "file": "AEGIS-S-20260618-1327.html",
+        "date": "2026-06-18T13:27:56.816299",
+        "size_kb": 76,
         "vulns": {
           "critical": 0,
-          "high": 4,
+          "high": 3,
           "medium": 5,
+          "low": 8
+        }
+      },
+      {
+        "tariff": "VERIFY",
+        "file": "AEGIS-V-20260618-1634.html",
+        "date": "2026-06-18T16:34:37.720535",
+        "size_kb": 227,
+        "vulns": {
+          "critical": 0,
+          "high": 3,
+          "medium": 3,
           "low": 8
         }
       }
@@ -245,12 +245,12 @@
   {
     "domain": "transpizza.ru",
     "folder": "transpizza_ru",
-    "last_scan": "2026-06-18T07:38:49.986430",
+    "last_scan": "2026-06-18T15:56:44.788628",
     "total_vulns": {
       "critical": 0,
       "high": 5,
-      "medium": 6,
-      "low": 5
+      "medium": 3,
+      "low": 6
     },
     "reports": [
       {
@@ -279,14 +279,14 @@
       },
       {
         "tariff": "VERIFY",
-        "file": "AEGIS-V-20260618-0738.html",
-        "date": "2026-06-18T07:38:49.986430",
+        "file": "AEGIS-V-20260618-1556.html",
+        "date": "2026-06-18T15:56:44.788628",
         "size_kb": 226,
         "vulns": {
           "critical": 0,
           "high": 5,
-          "medium": 6,
-          "low": 5
+          "medium": 3,
+          "low": 6
         }
       }
     ]
@@ -296,48 +296,60 @@
     "folder": "mark-mebel_ru",
     "reports": [
       {
-        "tariff": "COMPLY",
-        "file": "AEGIS-C-20260616-1737.html",
-        "date": "2026-06-16T17:37:17.188445",
-        "size_kb": 690,
+        "tariff": "VERIFY",
+        "file": "AEGIS-V-20260618-1900.html",
+        "date": "2026-06-18T19:00:05.075144",
+        "size_kb": 237,
         "vulns": {
           "critical": 0,
-          "high": 3,
-          "medium": 7,
+          "high": 6,
+          "medium": 5,
+          "low": 6
+        }
+      },
+      {
+        "tariff": "COMPLY",
+        "file": "AEGIS-C-20260618-1900.html",
+        "date": "2026-06-18T19:00:10.270016",
+        "size_kb": 724,
+        "vulns": {
+          "critical": 0,
+          "high": 6,
+          "medium": 5,
+          "low": 6
+        }
+      },
+      {
+        "tariff": "DEEP",
+        "file": "AEGIS-D-20260618-1900.html",
+        "date": "2026-06-18T19:00:17.049193",
+        "size_kb": 149,
+        "vulns": {
+          "critical": 0,
+          "high": 6,
+          "medium": 5,
           "low": 6
         }
       },
       {
         "tariff": "START",
-        "file": "AEGIS-S-20260616-1738.html",
-        "date": "2026-06-16T17:38:06.169526",
+        "file": "AEGIS-S-20260618-1906.html",
+        "date": "2026-06-18T19:06:09.913251",
         "size_kb": 76,
         "vulns": {
           "critical": 0,
-          "high": 3,
-          "medium": 7,
+          "high": 6,
+          "medium": 5,
           "low": 6
-        }
-      },
-      {
-        "tariff": "VERIFY",
-        "file": "AEGIS-V-20260618-0819.html",
-        "date": "2026-06-18T08:19:57.592977",
-        "size_kb": 232,
-        "vulns": {
-          "critical": 0,
-          "high": 4,
-          "medium": 6,
-          "low": 5
         }
       }
     ],
-    "last_scan": "2026-06-18T08:19:57.592977",
+    "last_scan": "2026-06-18T19:06:09.913251",
     "total_vulns": {
       "critical": 0,
-      "high": 4,
-      "medium": 6,
-      "low": 5
+      "high": 6,
+      "medium": 5,
+      "low": 6
     }
   },
   {
