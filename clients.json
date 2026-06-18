@@ -296,18 +296,6 @@
     "folder": "mark-mebel_ru",
     "reports": [
       {
-        "tariff": "DEEP",
-        "file": "AEGIS-D-20260618-1906.html",
-        "date": "2026-06-18T19:06:41.448392",
-        "size_kb": 149,
-        "vulns": {
-          "critical": 0,
-          "high": 6,
-          "medium": 5,
-          "low": 6
-        }
-      },
-      {
         "tariff": "START",
         "file": "AEGIS-S-20260618-1912.html",
         "date": "2026-06-18T19:12:50.125715",
@@ -342,9 +330,21 @@
           "medium": 5,
           "low": 6
         }
+      },
+      {
+        "tariff": "DEEP",
+        "file": "AEGIS-D-20260618-1913.html",
+        "date": "2026-06-18T19:13:21.076739",
+        "size_kb": 147,
+        "vulns": {
+          "critical": 0,
+          "high": 6,
+          "medium": 5,
+          "low": 6
+        }
       }
     ],
-    "last_scan": "2026-06-18T19:13:09.625303",
+    "last_scan": "2026-06-18T19:13:21.076739",
     "total_vulns": {
       "critical": 0,
       "high": 6,
