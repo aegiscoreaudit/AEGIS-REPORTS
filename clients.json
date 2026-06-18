@@ -2,7 +2,7 @@
   {
     "domain": "dodopizza.ru",
     "folder": "dodopizza_ru",
-    "last_scan": "2026-06-18T23:24:56.699456",
+    "last_scan": "2026-06-18T23:28:42.483023",
     "total_vulns": {
       "critical": 0,
       "high": 3,
@@ -48,8 +48,8 @@
       },
       {
         "tariff": "START",
-        "file": "AEGIS-S-20260618-2324.html",
-        "date": "2026-06-18T23:24:56.699456",
+        "file": "AEGIS-S-20260618-2328.html",
+        "date": "2026-06-18T23:28:42.483023",
         "size_kb": 76,
         "vulns": {
           "critical": 0,
