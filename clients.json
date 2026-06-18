@@ -321,23 +321,23 @@
       },
       {
         "tariff": "VERIFY",
-        "file": "AEGIS-V-20260616-1739.html",
-        "date": "2026-06-16T17:39:58.362115",
-        "size_kb": 223,
+        "file": "AEGIS-V-20260618-0819.html",
+        "date": "2026-06-18T08:19:57.592977",
+        "size_kb": 232,
         "vulns": {
           "critical": 0,
-          "high": 3,
-          "medium": 7,
-          "low": 6
+          "high": 4,
+          "medium": 6,
+          "low": 5
         }
       }
     ],
-    "last_scan": "2026-06-16T17:39:58.362115",
+    "last_scan": "2026-06-18T08:19:57.592977",
     "total_vulns": {
       "critical": 0,
-      "high": 3,
-      "medium": 7,
-      "low": 6
+      "high": 4,
+      "medium": 6,
+      "low": 5
     }
   },
   {
