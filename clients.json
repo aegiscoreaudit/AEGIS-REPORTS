@@ -504,18 +504,6 @@
     "folder": "pronto24_ru",
     "reports": [
       {
-        "tariff": "VERIFY",
-        "file": "AEGIS-V-20260617-2147.html",
-        "date": "2026-06-17T21:47:51.349938",
-        "size_kb": 221,
-        "vulns": {
-          "critical": 0,
-          "high": 4,
-          "medium": 7,
-          "low": 6
-        }
-      },
-      {
         "tariff": "DEEP",
         "file": "AEGIS-D-20260617-2148.html",
         "date": "2026-06-17T21:48:11.164906",
@@ -550,12 +538,24 @@
           "medium": 4,
           "low": 6
         }
+      },
+      {
+        "tariff": "VERIFY",
+        "file": "AEGIS-V-20260620-0711.html",
+        "date": "2026-06-20T07:11:08.159502",
+        "size_kb": 232,
+        "vulns": {
+          "critical": 0,
+          "high": 3,
+          "medium": 4,
+          "low": 6
+        }
       }
     ],
-    "last_scan": "2026-06-20T00:10:45.565173",
+    "last_scan": "2026-06-20T07:11:08.159502",
     "total_vulns": {
       "critical": 0,
-      "high": 4,
+      "high": 3,
       "medium": 4,
       "low": 6
     }
