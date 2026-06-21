@@ -625,14 +625,26 @@
           "medium": 5,
           "low": 6
         }
+      },
+      {
+        "tariff": "START",
+        "file": "AEGIS-S-20260621-2230.html",
+        "date": "2026-06-21T22:30:53.123396",
+        "size_kb": 76,
+        "vulns": {
+          "critical": 0,
+          "high": 4,
+          "medium": 5,
+          "low": 7
+        }
       }
     ],
-    "last_scan": "2026-06-21T18:52:29.316018",
+    "last_scan": "2026-06-21T22:30:53.123396",
     "total_vulns": {
       "critical": 0,
-      "high": 6,
+      "high": 4,
       "medium": 5,
-      "low": 6
+      "low": 7
     }
   }
 ]
