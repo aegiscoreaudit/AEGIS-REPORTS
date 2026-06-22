@@ -615,18 +615,6 @@
     "folder": "zomz_ru",
     "reports": [
       {
-        "tariff": "START",
-        "file": "AEGIS-S-20260622-0650.html",
-        "date": "2026-06-22T06:50:20.130455",
-        "size_kb": 77,
-        "vulns": {
-          "critical": 0,
-          "high": 4,
-          "medium": 5,
-          "low": 7
-        }
-      },
-      {
         "tariff": "VERIFY",
         "file": "AEGIS-V-20260622-0738.html",
         "date": "2026-06-22T07:38:59.795065",
@@ -637,14 +625,26 @@
           "medium": 5,
           "low": 6
         }
+      },
+      {
+        "tariff": "START",
+        "file": "AEGIS-S-20260622-1037.html",
+        "date": "2026-06-22T10:37:57.950412",
+        "size_kb": 77,
+        "vulns": {
+          "critical": 0,
+          "high": 4,
+          "medium": 5,
+          "low": 7
+        }
       }
     ],
-    "last_scan": "2026-06-22T07:38:59.795065",
+    "last_scan": "2026-06-22T10:37:57.950412",
     "total_vulns": {
-      "critical": 1,
-      "high": 5,
+      "critical": 0,
+      "high": 4,
       "medium": 5,
-      "low": 6
+      "low": 7
     }
   }
 ]
