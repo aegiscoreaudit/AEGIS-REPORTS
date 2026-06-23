@@ -245,38 +245,14 @@
   {
     "domain": "transpizza.ru",
     "folder": "transpizza_ru",
-    "last_scan": "2026-06-18T15:56:44.788628",
+    "last_scan": "2026-06-23T08:08:24.882086",
     "total_vulns": {
       "critical": 0,
-      "high": 5,
-      "medium": 3,
-      "low": 6
+      "high": 3,
+      "medium": 9,
+      "low": 9
     },
     "reports": [
-      {
-        "tariff": "START",
-        "file": "AEGIS-S-20260616-1248.html",
-        "date": "2026-06-16T12:48:15.279949",
-        "size_kb": 75,
-        "vulns": {
-          "critical": 0,
-          "high": 0,
-          "medium": 0,
-          "low": 0
-        }
-      },
-      {
-        "tariff": "START",
-        "file": "AEGIS-S-20260616-1254.html",
-        "date": "2026-06-16T12:54:02.347597",
-        "size_kb": 75,
-        "vulns": {
-          "critical": 0,
-          "high": 0,
-          "medium": 0,
-          "low": 0
-        }
-      },
       {
         "tariff": "VERIFY",
         "file": "AEGIS-V-20260618-1556.html",
@@ -287,6 +263,18 @@
           "high": 5,
           "medium": 3,
           "low": 6
+        }
+      },
+      {
+        "tariff": "START",
+        "file": "AEGIS-S-20260623-0808.html",
+        "date": "2026-06-23T08:08:24.882086",
+        "size_kb": 77,
+        "vulns": {
+          "critical": 0,
+          "high": 3,
+          "medium": 9,
+          "low": 9
         }
       }
     ]
