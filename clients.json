@@ -245,11 +245,11 @@
   {
     "domain": "transpizza.ru",
     "folder": "transpizza_ru",
-    "last_scan": "2026-06-23T08:37:45.570576",
+    "last_scan": "2026-06-23T17:45:31.316593",
     "total_vulns": {
       "critical": 0,
-      "high": 3,
-      "medium": 9,
+      "high": 2,
+      "medium": 3,
       "low": 9
     },
     "reports": [
@@ -267,13 +267,13 @@
       },
       {
         "tariff": "START",
-        "file": "AEGIS-S-20260623-0837.html",
-        "date": "2026-06-23T08:37:45.570576",
+        "file": "AEGIS-S-20260623-1745.html",
+        "date": "2026-06-23T17:45:31.316593",
         "size_kb": 77,
         "vulns": {
           "critical": 0,
-          "high": 3,
-          "medium": 9,
+          "high": 2,
+          "medium": 3,
           "low": 9
         }
       }
